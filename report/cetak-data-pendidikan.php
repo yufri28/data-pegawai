@@ -1,11 +1,24 @@
 <?php
 include "../inc/koneksi.php";
 
+$st = "";
 if (isset($_GET['nip'])) {
     $nip = $_GET['nip'];
     $sql_tampil = "SELECT * FROM data_pendidikan dpd JOIN data_pegawai dpg ON dpd.id_pegawai=dpg.id_pegawai WHERE dpg.nip='$nip'";
 } else {
-    $sql_tampil = "SELECT * FROM data_pendidikan dpd JOIN data_pegawai dpg ON dpd.id_pegawai=dpg.id_pegawai";
+    if (isset($_GET["st"])) {
+        switch ($_GET['st']) {
+            case 'ttp':
+                $st = 'Tetap';
+                break;
+            case 'hnr':
+                $st = 'Honor';
+                break;
+        }
+        $sql_tampil = "SELECT * FROM data_pendidikan dpd JOIN data_pegawai dpg ON dpd.id_pegawai=dpg.id_pegawai WHERE dpg.status='$st'";
+    } else {
+        $sql_tampil = "SELECT * FROM data_pendidikan dpd JOIN data_pegawai dpg ON dpd.id_pegawai=dpg.id_pegawai";
+    }
 }
 
 $sql_cek = "SELECT * FROM tb_profil";
@@ -54,7 +67,9 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
 
     $query_tampil = mysqli_query($koneksi, $sql_tampil);
     $no = 1;
-
+    if (mysqli_num_rows($query_tampil) < 1) {
+        echo "<script>alert('Tidak ada data yang dapat dicetak!');window.location.href='../index.php?page=data-mutasi'</script>";
+    }
     echo "<center><h4><u>DATA PENDIDIKAN</u></h4></center>";
         ?>
 

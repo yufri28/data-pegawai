@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 02:49 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Waktu pembuatan: 11 Des 2023 pada 08.38
+-- Versi server: 10.4.14-MariaDB
+-- Versi PHP: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_golongan`
+-- Struktur dari tabel `data_golongan`
 --
 
 CREATE TABLE `data_golongan` (
@@ -33,10 +33,10 @@ CREATE TABLE `data_golongan` (
   `tmt` date NOT NULL,
   `jumlah_gaji` int(11) NOT NULL,
   `id_pegawai` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_golongan`
+-- Dumping data untuk tabel `data_golongan`
 --
 
 INSERT INTO `data_golongan` (`id_golongan`, `golongan`, `tmt`, `jumlah_gaji`, `id_pegawai`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `data_golongan` (`id_golongan`, `golongan`, `tmt`, `jumlah_gaji`, `i
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_jabatan`
+-- Struktur dari tabel `data_jabatan`
 --
 
 CREATE TABLE `data_jabatan` (
@@ -55,10 +55,10 @@ CREATE TABLE `data_jabatan` (
   `eselon` int(20) NOT NULL,
   `tmt` varchar(20) NOT NULL,
   `id_pegawai` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_jabatan`
+-- Dumping data untuk tabel `data_jabatan`
 --
 
 INSERT INTO `data_jabatan` (`id_jabatan`, `nama`, `eselon`, `tmt`, `id_pegawai`) VALUES
@@ -68,7 +68,7 @@ INSERT INTO `data_jabatan` (`id_jabatan`, `nama`, `eselon`, `tmt`, `id_pegawai`)
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_mutasi`
+-- Struktur dari tabel `data_mutasi`
 --
 
 CREATE TABLE `data_mutasi` (
@@ -76,10 +76,10 @@ CREATE TABLE `data_mutasi` (
   `id_pegawai` int(11) NOT NULL,
   `tempat_mutasi` varchar(255) NOT NULL,
   `jenis_mutasi` enum('Keluar','Masuk') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_mutasi`
+-- Dumping data untuk tabel `data_mutasi`
 --
 
 INSERT INTO `data_mutasi` (`id_mutasi`, `id_pegawai`, `tempat_mutasi`, `jenis_mutasi`) VALUES
@@ -88,7 +88,7 @@ INSERT INTO `data_mutasi` (`id_mutasi`, `id_pegawai`, `tempat_mutasi`, `jenis_mu
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_pegawai`
+-- Struktur dari tabel `data_pegawai`
 --
 
 CREATE TABLE `data_pegawai` (
@@ -103,10 +103,10 @@ CREATE TABLE `data_pegawai` (
   `agama` enum('Kristen','Islam','Katolik','Hindu','Buddha','Khonghucu') NOT NULL,
   `status` enum('Tetap','Honor') NOT NULL,
   `id_periode` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `data_pegawai`
+-- Dumping data untuk tabel `data_pegawai`
 --
 
 INSERT INTO `data_pegawai` (`id_pegawai`, `nip`, `nama`, `alamat`, `no_hp`, `tempat_lahir`, `tanggal_lahir`, `jk`, `agama`, `status`, `id_periode`) VALUES
@@ -116,7 +116,7 @@ INSERT INTO `data_pegawai` (`id_pegawai`, `nip`, `nama`, `alamat`, `no_hp`, `tem
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_pendidikan`
+-- Struktur dari tabel `data_pendidikan`
 --
 
 CREATE TABLE `data_pendidikan` (
@@ -125,24 +125,26 @@ CREATE TABLE `data_pendidikan` (
   `tahun_lulus` year(4) NOT NULL,
   `jurusan` varchar(100) NOT NULL,
   `pendidikan_terakhir` varchar(5) NOT NULL,
-  `lembaga_pendidikan` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `lembaga_pendidikan` varchar(100) NOT NULL,
+  `kursus_diklat` text DEFAULT NULL,
+  `pend_perjenjangan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_pendidikan`
+-- Dumping data untuk tabel `data_pendidikan`
 --
 
-INSERT INTO `data_pendidikan` (`id_pendidikan`, `id_pegawai`, `tahun_lulus`, `jurusan`, `pendidikan_terakhir`, `lembaga_pendidikan`) VALUES
-(2, 1302, '2008', 'Kimia', 'S1', 'Undana'),
-(3, 1303, '2008', 'Kimia', 'S1', 'Undana'),
-(4, 1306, '2012', 'Kimia', 'S1', 'Undana'),
-(5, 1308, '2012', 'Pertanian', 'S2', 'Undana'),
-(6, 1309, '2009', 'Pertanian', 'SMA', 'Undana');
+INSERT INTO `data_pendidikan` (`id_pendidikan`, `id_pegawai`, `tahun_lulus`, `jurusan`, `pendidikan_terakhir`, `lembaga_pendidikan`, `kursus_diklat`, `pend_perjenjangan`) VALUES
+(2, 1302, 2008, 'Kimia', 'S1', 'Undana', '', ''),
+(3, 1303, 2008, 'Kimia', 'S1', 'Undana', '', ''),
+(4, 1306, 2012, 'Kimia', 'S1', 'Undana', '', ''),
+(6, 1309, 2009, 'Pertanian', 'SMA', 'Undana', '', ''),
+(7, 1308, 2018, 'Ilmu Komputer', 'S1', 'Universitas Nusa Cendana', 'Kursus Bahasa Inggris, Kursus Bahasa Jerman dan Kursus Komputer', 'Pra Identifikasi Klpk sasaran PPL, Agribisnis Ternak Potong dan Teknologi  Lahan');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `data_pensiun`
+-- Struktur dari tabel `data_pensiun`
 --
 
 CREATE TABLE `data_pensiun` (
@@ -150,38 +152,38 @@ CREATE TABLE `data_pensiun` (
   `id_pegawai` int(11) NOT NULL,
   `tahun_pensiun` year(4) NOT NULL,
   `jabatan_terakhir` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `data_pensiun`
+-- Dumping data untuk tabel `data_pensiun`
 --
 
 INSERT INTO `data_pensiun` (`id_pensiun`, `id_pegawai`, `tahun_pensiun`, `jabatan_terakhir`) VALUES
-(10, 1308, '2028', 'Kabid TPH');
+(10, 1308, 2028, 'Kabid TPH');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `periode`
+-- Struktur dari tabel `periode`
 --
 
 CREATE TABLE `periode` (
   `id_periode` int(11) NOT NULL,
   `tahun` year(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `periode`
+-- Dumping data untuk tabel `periode`
 --
 
 INSERT INTO `periode` (`id_periode`, `tahun`) VALUES
-(13, '2023'),
-(17, '2024');
+(13, 2023),
+(17, 2024);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pengguna`
+-- Struktur dari tabel `tb_pengguna`
 --
 
 CREATE TABLE `tb_pengguna` (
@@ -190,10 +192,10 @@ CREATE TABLE `tb_pengguna` (
   `username` varchar(30) NOT NULL,
   `password` varchar(20) NOT NULL,
   `level` enum('Administrator','Sekretaris') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_pengguna`
+-- Dumping data untuk tabel `tb_pengguna`
 --
 
 INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password`, `level`) VALUES
@@ -204,7 +206,7 @@ INSERT INTO `tb_pengguna` (`id_pengguna`, `nama_pengguna`, `username`, `password
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_profil`
+-- Struktur dari tabel `tb_profil`
 --
 
 CREATE TABLE `tb_profil` (
@@ -212,10 +214,10 @@ CREATE TABLE `tb_profil` (
   `nama_profil` varchar(50) NOT NULL,
   `alamat` text NOT NULL,
   `bidang` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tb_profil`
+-- Dumping data untuk tabel `tb_profil`
 --
 
 INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `bidang`) VALUES
@@ -226,42 +228,42 @@ INSERT INTO `tb_profil` (`id_profil`, `nama_profil`, `alamat`, `bidang`) VALUES
 --
 
 --
--- Indexes for table `data_golongan`
+-- Indeks untuk tabel `data_golongan`
 --
 ALTER TABLE `data_golongan`
   ADD PRIMARY KEY (`id_golongan`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indexes for table `data_jabatan`
+-- Indeks untuk tabel `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   ADD PRIMARY KEY (`id_jabatan`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indexes for table `data_mutasi`
+-- Indeks untuk tabel `data_mutasi`
 --
 ALTER TABLE `data_mutasi`
   ADD PRIMARY KEY (`id_mutasi`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indexes for table `data_pegawai`
+-- Indeks untuk tabel `data_pegawai`
 --
 ALTER TABLE `data_pegawai`
   ADD PRIMARY KEY (`id_pegawai`),
   ADD KEY `id_periode` (`id_periode`);
 
 --
--- Indexes for table `data_pendidikan`
+-- Indeks untuk tabel `data_pendidikan`
 --
 ALTER TABLE `data_pendidikan`
   ADD PRIMARY KEY (`id_pendidikan`),
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indexes for table `data_pensiun`
+-- Indeks untuk tabel `data_pensiun`
 --
 ALTER TABLE `data_pensiun`
   ADD PRIMARY KEY (`id_pensiun`),
@@ -269,105 +271,105 @@ ALTER TABLE `data_pensiun`
   ADD KEY `id_pegawai` (`id_pegawai`);
 
 --
--- Indexes for table `periode`
+-- Indeks untuk tabel `periode`
 --
 ALTER TABLE `periode`
   ADD PRIMARY KEY (`id_periode`);
 
 --
--- Indexes for table `tb_pengguna`
+-- Indeks untuk tabel `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
   ADD PRIMARY KEY (`id_pengguna`);
 
 --
--- Indexes for table `tb_profil`
+-- Indeks untuk tabel `tb_profil`
 --
 ALTER TABLE `tb_profil`
   ADD PRIMARY KEY (`id_profil`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `data_golongan`
+-- AUTO_INCREMENT untuk tabel `data_golongan`
 --
 ALTER TABLE `data_golongan`
   MODIFY `id_golongan` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `data_jabatan`
+-- AUTO_INCREMENT untuk tabel `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
   MODIFY `id_jabatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `data_mutasi`
+-- AUTO_INCREMENT untuk tabel `data_mutasi`
 --
 ALTER TABLE `data_mutasi`
   MODIFY `id_mutasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `data_pegawai`
+-- AUTO_INCREMENT untuk tabel `data_pegawai`
 --
 ALTER TABLE `data_pegawai`
   MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1310;
 
 --
--- AUTO_INCREMENT for table `data_pendidikan`
+-- AUTO_INCREMENT untuk tabel `data_pendidikan`
 --
 ALTER TABLE `data_pendidikan`
-  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pendidikan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `data_pensiun`
+-- AUTO_INCREMENT untuk tabel `data_pensiun`
 --
 ALTER TABLE `data_pensiun`
   MODIFY `id_pensiun` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `periode`
+-- AUTO_INCREMENT untuk tabel `periode`
 --
 ALTER TABLE `periode`
   MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `tb_pengguna`
+-- AUTO_INCREMENT untuk tabel `tb_pengguna`
 --
 ALTER TABLE `tb_pengguna`
   MODIFY `id_pengguna` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tb_profil`
+-- AUTO_INCREMENT untuk tabel `tb_profil`
 --
 ALTER TABLE `tb_profil`
   MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `data_golongan`
+-- Ketidakleluasaan untuk tabel `data_golongan`
 --
 ALTER TABLE `data_golongan`
   ADD CONSTRAINT `data_golongan_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `data_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `data_mutasi`
+-- Ketidakleluasaan untuk tabel `data_mutasi`
 --
 ALTER TABLE `data_mutasi`
   ADD CONSTRAINT `data_mutasi_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `data_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `data_pegawai`
+-- Ketidakleluasaan untuk tabel `data_pegawai`
 --
 ALTER TABLE `data_pegawai`
   ADD CONSTRAINT `data_pegawai_ibfk_1` FOREIGN KEY (`id_periode`) REFERENCES `periode` (`id_periode`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `data_pensiun`
+-- Ketidakleluasaan untuk tabel `data_pensiun`
 --
 ALTER TABLE `data_pensiun`
   ADD CONSTRAINT `data_pensiun_ibfk_1` FOREIGN KEY (`id_pegawai`) REFERENCES `data_pegawai` (`id_pegawai`) ON DELETE CASCADE ON UPDATE CASCADE;
