@@ -1,13 +1,12 @@
 <?php
 
-        $sql_cek = "SELECT * FROM tb_profil";
-        $query_cek = mysqli_query($koneksi, $sql_cek);
-		$data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
-		{
+$sql_cek = "SELECT * FROM tb_profil";
+$query_cek = mysqli_query($koneksi, $sql_cek);
+$data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
 
-		
+
 ?>
-<!-- 
+    <!-- 
 <div class="card card-info">
 	<div class="card-header">
 		<h3 class="card-title">
@@ -42,35 +41,35 @@
 </div> -->
 
 <?php
-		}
-	$sql = $koneksi->query("SELECT count(nip) as lokal from data_pegawai");
-	while ($data= $sql->fetch_assoc()) {
-	
-		$lokal=$data['lokal'];
-	}
+}
+$sql = $koneksi->query("SELECT count(nip) as lokal from data_pegawai");
+while ($data = $sql->fetch_assoc()) {
+
+    $lokal = $data['lokal'];
+}
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(nip) as tetap from data_pegawai where status='Tetap'");
-	while ($data= $sql->fetch_assoc()) {
-	
-		$tetap=$data['tetap'];
-	}
+$sql = $koneksi->query("SELECT count(nip) as tetap from data_pegawai where status='Tetap'");
+while ($data = $sql->fetch_assoc()) {
+
+    $tetap = $data['tetap'];
+}
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(nip) as honor from data_pegawai where status='Honor'");
-	while ($data= $sql->fetch_assoc()) {
-	
-		$honor=$data['honor'];
-	}
+$sql = $koneksi->query("SELECT count(nip) as honor from data_pegawai where status='Honor'");
+while ($data = $sql->fetch_assoc()) {
+
+    $honor = $data['honor'];
+}
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(id_pengguna) as boyong from tb_pengguna");
-	while ($data= $sql->fetch_assoc()) {
-		$boyong=$data['boyong'];
-	}
+$sql = $koneksi->query("SELECT count(id_pengguna) as boyong from tb_pengguna");
+while ($data = $sql->fetch_assoc()) {
+    $boyong = $data['boyong'];
+}
 ?>
 
 <div class="row">
@@ -87,7 +86,7 @@
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="index.php?page=data-santri" class="small-box-footer">Selengkapnya
+            <a href="index.php?page=data-pegawai" class="small-box-footer">Selengkapnya
                 <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
