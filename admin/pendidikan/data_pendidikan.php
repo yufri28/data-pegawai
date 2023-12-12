@@ -48,6 +48,8 @@
                         <th style="width: 280px;">Jurusan</th>
                         <th style="width: 110px;">Pendidikan Terakhir</th>
                         <th style="width: 400px;">Lembaga Pendidikan</th>
+                        <th style="width: 110px;">Kursus/Diklat</th>
+                        <th style="width: 400px;">Pendidikan Perjenjangan</th>
                         <th style="width: 90px;">Aksi</th>
                     </tr>
                 </thead>
@@ -81,6 +83,12 @@
                             </td>
                             <td>
                                 <?php echo $data['lembaga_pendidikan']; ?>
+                            </td>
+                            <td>
+                                <?= $data['kursus_diklat'] != NULL ? $data['kursus_diklat'] : '-'; ?>
+                            </td>
+                            <td>
+                                <?= $data['pend_perjenjangan'] != NULL ? $data['pend_perjenjangan'] : '-'; ?>
                             </td>
 
                             <td>
