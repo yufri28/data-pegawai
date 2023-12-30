@@ -53,6 +53,8 @@
                         <th>Alamat</th>
                         <th>No HP</th>
                         <th>Periode</th>
+                        <th>SKPP</th>
+                        <th>SKPT</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -88,7 +90,7 @@
                                 <?php echo $data['tempat_lahir']; ?>
                             </td>
                             <td>
-                                <?php echo $data['tanggal_lahir']; ?>
+                                <?php echo date('d F Y', strtotime($data['tanggal_lahir'])); ?>
                             </td>
                             <td>
                                 <?php echo $data['agama']; ?>
@@ -102,7 +104,13 @@
                             <td>
                                 <?php echo $data['tahun']; ?>
                             </td>
-
+                            <td>
+                                <?= $data['skpp'] == NULL ?'-':date('d F Y', strtotime($data['skpp'])); ?>
+                            </td>
+                            <td>
+                                <?= $data['skpt'] == NULL ?'-':date('d F Y', strtotime($data['skpt'])); ?>
+                            </td>
+                            
                             <td>
                                 <a href="?page=view-pegawai&kode=<?php echo $data['nip']; ?>" title="Detail" class="btn btn-info btn-sm">
                                     <i class="fa fa-eye"></i>

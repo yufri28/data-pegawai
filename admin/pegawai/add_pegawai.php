@@ -64,10 +64,10 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Status Pegawai</label>
                 <div class="col-sm-5">
-                    <select name="status" id="status" class="form-control">
+                    <select name="status" id="status" required class="form-control">
                         <option>- Pilih -</option>
                         <option>Tetap</option>
-                        <option>Honorer</option>
+                        <option>Honor</option>
                     </select>
                 </div>
             </div>
@@ -102,6 +102,20 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
                     </select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SKPP</label>
+                <div class="col-sm-5">
+                    <input type="date" class="form-control" id="skpp" name="skpp" required>
+                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS (PNS)</i></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SKPT</label>
+                <div class="col-sm-5">
+                    <input type="date" class="form-control" id="skpt" name="skpt" required>
+                    <small><i>Tanggal SK Pengangkatan Terakhir (Honor) atau Tanggal SK Pensiun (PNS)</i></small>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
@@ -112,17 +126,19 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
 
 <?php
     if (isset($_POST['Simpan'])){
-		$sql_simpan = "INSERT INTO data_pegawai (nip, nama, alamat, no_hp, tempat_lahir, tanggal_lahir, jk, agama, status,id_periode) VALUES (
-			'".$_POST['nip']."',
-			'".$_POST['nama']."',
-			'".$_POST['alamat']."',
-			'".$_POST['no_hp']."',
-			'".$_POST['tempat_lahir']."',
-			'".$_POST['tanggal_lahir']."',
-			'".$_POST['jk']."',
-			'".$_POST['agama']."',
-			'".$_POST['status']."',
-            '".$_POST['id_periode']."')";
+		$sql_simpan = "INSERT INTO data_pegawai (nip, nama, alamat, no_hp, tempat_lahir, tanggal_lahir, jk, agama, status,id_periode,skpp,skpt) VALUES (
+			'".htmlspecialchars($_POST['nip'])."',
+			'".htmlspecialchars($_POST['nama'])."',
+			'".htmlspecialchars($_POST['alamat'])."',
+			'".htmlspecialchars($_POST['no_hp'])."',
+			'".htmlspecialchars($_POST['tempat_lahir'])."',
+			'".htmlspecialchars($_POST['tanggal_lahir'])."',
+			'".htmlspecialchars($_POST['jk'])."',
+			'".htmlspecialchars($_POST['agama'])."',
+			'".htmlspecialchars($_POST['status'])."',
+            '".htmlspecialchars($_POST['id_periode'])."',
+            '".htmlspecialchars($_POST['skpp'])."',
+            '".htmlspecialchars($_POST['skpt'])."')";
 		$query_simpan = mysqli_query($koneksi, $sql_simpan);
 		mysqli_close($koneksi);
 

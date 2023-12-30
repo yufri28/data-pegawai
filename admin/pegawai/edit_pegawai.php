@@ -75,7 +75,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Status Pegawai</label>
                 <div class="col-sm-5">
-                    <select name="status" id="status" class="form-control">
+                    <select name="status" required id="status" class="form-control">
                         <option>- Pilih -</option>
                         <option <?=$data_cek['status'] == "Tetap" ? "selected":"";?>>Tetap</option>
                         <option <?=$data_cek['status'] == "Honor" ? "selected":"";?>>Honor</option>
@@ -115,6 +115,20 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SKPP</label>
+                <div class="col-sm-5">
+                    <input type="date" class="form-control" value="<?=$data_cek['skpp'];?>" id="skpp" name="skpp" required>
+                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS (PNS)</i></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">SKPT</label>
+                <div class="col-sm-5">
+                    <input type="date" class="form-control" value="<?=$data_cek['skpt'];?>" id="skpt" name="skpt" required>
+                    <small><i>Tanggal SK Pengangkatan Terakhir (Honor) atau Tanggal SK Pensiun (PNS)</i></small>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
@@ -127,17 +141,19 @@
 	
 if (isset ($_POST['Ubah'])){
 	$sql_ubah = "UPDATE data_pegawai SET
-		nip='".$_POST['nip']."',
-		nama='".$_POST['nama']."',
-		alamat='".$_POST['alamat']."',
-		no_hp='".$_POST['no_hp']."',
-		tempat_lahir='".$_POST['tempat_lahir']."',
-		tanggal_lahir='".$_POST['tanggal_lahir']."',
-		jk='".$_POST['jk']."',
-		agama='".$_POST['agama']."',
-		status='".$_POST['status']."',
-		id_periode='".$_POST['id_periode']."'
-		WHERE id_pegawai='".$_POST['id_pegawai']."'";
+		nip='".htmlspecialchars($_POST['nip'])."',
+		nama='".htmlspecialchars($_POST['nama'])."',
+		alamat='".htmlspecialchars($_POST['alamat'])."',
+		no_hp='".htmlspecialchars($_POST['no_hp'])."',
+		tempat_lahir='".htmlspecialchars($_POST['tempat_lahir'])."',
+		tanggal_lahir='".htmlspecialchars($_POST['tanggal_lahir'])."',
+		jk='".htmlspecialchars($_POST['jk'])."',
+		agama='".htmlspecialchars($_POST['agama'])."',
+		status='".htmlspecialchars($_POST['status'])."',
+		id_periode='".htmlspecialchars($_POST['id_periode'])."',
+        skpp='".htmlspecialchars($_POST['skpp'])."',
+        skpt='".htmlspecialchars($_POST['skpt'])."'
+		WHERE id_pegawai='".htmlspecialchars($_POST['id_pegawai'])."'";
 		
 	$query_ubah = mysqli_query($koneksi, $sql_ubah);
 

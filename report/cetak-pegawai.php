@@ -118,6 +118,8 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                     <th style="padding: 5px;">Golongan</th>
                     <th style="padding: 5px;">Pendidikan</th>
                     <th style="padding: 15px;">Jabatan</th>
+                    <th style="padding: 15px;">SKPP</th>
+                    <th style="padding: 15px;">SKPT</th>
                 </tr>
             </thead>
             <tbody>
@@ -136,7 +138,7 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo $data['tempat_lahir']; ?>
                         </td>
                         <td>
-                            <?php echo $data['tanggal_lahir']; ?>
+                            <?php echo date('d-m-Y', strtotime($data['tanggal_lahir'])); ?>
                         </td>
                         <td>
                             <?php echo $data['jk']; ?>
@@ -158,6 +160,12 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                         </td>
                         <td>
                             <?php echo $data['nama_jabatan']; ?>
+                        </td>
+                        <td style='text-align:center'>
+                            <?= $data['skpp'] == NULL?'-':date('d-m-Y', strtotime($data['skpp']));?>
+                        </td>
+                        <td style='text-align:center'>
+                            <?= $data['skpt'] == NULL?'-':date('d-m-Y', strtotime($data['skpt']));?>
                         </td>
                     </tr>
                 <?php endwhile; ?>

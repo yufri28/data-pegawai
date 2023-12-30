@@ -63,7 +63,7 @@
                                 <b>Tanggal Lahir</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tanggal_lahir']; ?>
+                                <?php echo date('d F Y', strtotime($data_cek['tanggal_lahir'])); ?>
                             </td>
                         </tr>
                         <tr>
@@ -96,6 +96,22 @@
                             </td>
                             <td>:
                                 <?php echo $data_cek['tahun']; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b><?= $data_cek['status'] == 'Honor'? 'SK Pengangkatan Pertama':'SK Pengangkatan CPNS';?></b>
+                            </td>
+                            <td>:
+                                <?= $data_cek['skpp'] == NULL ?'-':date('d F Y', strtotime($data_cek['skpp'])); ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b><?= $data_cek['status'] == 'Honor'? 'SK Pengangkatan Terakhir':'SK Pensiun';?></b>
+                            </td>
+                            <td>:
+                                <?= $data_cek['skpt'] == NULL ?'-':date('d F Y', strtotime($data_cek['skpt'])); ?>
                             </td>
                         </tr>
                     </tbody>
