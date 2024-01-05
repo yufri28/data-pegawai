@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2023 at 09:16 AM
+-- Generation Time: Jan 05, 2024 at 02:45 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -52,7 +52,7 @@ INSERT INTO `data_golongan` (`id_golongan`, `golongan`, `tmt`, `jumlah_gaji`, `i
 CREATE TABLE `data_jabatan` (
   `id_jabatan` int(5) NOT NULL,
   `nama` varchar(50) NOT NULL,
-  `eselon` int(20) NOT NULL,
+  `eselon` varchar(20) NOT NULL,
   `tmt` varchar(20) NOT NULL,
   `id_pegawai` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -62,8 +62,9 @@ CREATE TABLE `data_jabatan` (
 --
 
 INSERT INTO `data_jabatan` (`id_jabatan`, `nama`, `eselon`, `tmt`, `id_pegawai`) VALUES
-(1, 'Kabit', 3, '2023-11-10', 1306),
-(3, 'Kepala Bidang Tanaman Pangan dan Hortikultura', 0, '2023-11-10', 1308);
+(1, 'Kabit', '3', '2023-11-10', 1306),
+(3, 'Kepala Bidang Tanaman Pangan dan Hortikultura', 'IV-B', '2023-11-10', 1308),
+(4, 'Kabit', 'IV-A', '2024-01-05', 1308);
 
 -- --------------------------------------------------------
 
@@ -304,7 +305,7 @@ ALTER TABLE `data_golongan`
 -- AUTO_INCREMENT for table `data_jabatan`
 --
 ALTER TABLE `data_jabatan`
-  MODIFY `id_jabatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_jabatan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `data_mutasi`
