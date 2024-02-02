@@ -1,8 +1,8 @@
 <?php
 include "../inc/koneksi.php";
 $st = '';
-if (isset($_GET['nip'])) {
-    $nip = $_GET['nip'];
+if (isset($_GET['kode'])) {
+    $id_pegawai = $_GET['kode'];
     $sql_tampil = "SELECT 
                         dp.*, 
                         COALESCE(dg.golongan, '-') AS nama_golongan, 
@@ -11,7 +11,7 @@ if (isset($_GET['nip'])) {
                         FROM data_pegawai dp 
                         LEFT JOIN data_golongan dg ON dg.id_pegawai = dp.id_pegawai 
                         LEFT JOIN data_jabatan dj ON dj.id_pegawai = dp.id_pegawai 
-                        LEFT JOIN data_pendidikan dpd ON dpd.id_pegawai = dp.id_pegawai WHERE nip='$nip'";
+                        LEFT JOIN data_pendidikan dpd ON dpd.id_pegawai = dp.id_pegawai WHERE dp.id_pegawai='$id_pegawai'";
 } else {
     if (isset($_GET["st"])) {
         switch ($_GET['st']) {
@@ -108,7 +108,7 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                 <tr style="text-align: center;">
                     <th style="padding: 15px;">NIP</th>
                     <th style="padding: 15px;">Nama</th>
-                    <th style="padding: 5px;">No HP</th>
+                    <th style="padding: 5px;">Masa Kerja</th>
                     <th style="padding: 20px;">Tempat Lahir</th>
                     <th style="padding: 20px;">Tanggal Lahir</th>
                     <th style="padding: 5px;">Jenis Kelamin</th>
@@ -132,7 +132,7 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo $data['nama']; ?>
                         </td>
                         <td>
-                            <?php echo $data['no_hp']; ?>
+                            <?php echo $data['masa_kerja']; ?>
                         </td>
                         <td>
                             <?php echo $data['tempat_lahir']; ?>
@@ -162,10 +162,10 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo $data['nama_jabatan']; ?>
                         </td>
                         <td style='text-align:center'>
-                            <?= $data['skpp'] == NULL?'-':date('d-m-Y', strtotime($data['skpp']));?>
+                            <?= $data['skpp'] == NULL ? '-' : date('d-m-Y', strtotime($data['skpp'])); ?>
                         </td>
                         <td style='text-align:center'>
-                            <?= $data['skpt'] == NULL?'-':date('d-m-Y', strtotime($data['skpt']));?>
+                            <?= $data['skpt'] == NULL ? '-' : date('d-m-Y', strtotime($data['skpt'])); ?>
                         </td>
                     </tr>
                 <?php endwhile; ?>

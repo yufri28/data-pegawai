@@ -51,7 +51,7 @@
                         <th>Tanggal Lahir</th>
                         <th>Agama</th>
                         <th>Alamat</th>
-                        <th>No HP</th>
+                        <th>Masa Kerja</th>
                         <th>Periode</th>
                         <th>SKPP</th>
                         <th>SKPT</th>
@@ -99,27 +99,27 @@
                                 <?php echo $data['alamat']; ?>
                             </td>
                             <td>
-                                <?php echo $data['no_hp']; ?>
+                                <?php echo $data['masa_kerja']; ?>
                             </td>
                             <td>
                                 <?php echo $data['tahun']; ?>
                             </td>
                             <td>
-                                <?= $data['skpp'] == NULL ?'-':date('d F Y', strtotime($data['skpp'])); ?>
+                                <?= $data['skpp'] == NULL ? '-' : date('d F Y', strtotime($data['skpp'])); ?>
                             </td>
                             <td>
-                                <?= $data['skpt'] == NULL ?'-':date('d F Y', strtotime($data['skpt'])); ?>
+                                <?= $data['skpt'] == NULL ? '-' : date('d F Y', strtotime($data['skpt'])); ?>
                             </td>
-                            
+
                             <td>
-                                <a href="?page=view-pegawai&kode=<?php echo $data['nip']; ?>" title="Detail" class="btn btn-info btn-sm">
+                                <a href="?page=view-pegawai&kode=<?php echo $data['id_pegawai']; ?>" title="Detail" class="btn btn-info btn-sm">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 </a>
-                                <a href="?page=edit-pegawai&kode=<?php echo $data['nip']; ?>" title="Ubah" class="btn btn-success btn-sm">
+                                <a href="?page=edit-pegawai&kode=<?php echo $data['id_pegawai']; ?>" title="Ubah" class="btn btn-success btn-sm">
                                     <i class="fa fa-edit"></i>
                                 </a>
-                                <a href="?page=del-pegawai&kode=<?php echo $data['nip']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
+                                <a href="?page=del-pegawai&kode=<?php echo $data['id_pegawai']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
                                     <i class="fa fa-trash"></i>
                             </td>
                         </tr>

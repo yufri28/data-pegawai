@@ -1,10 +1,10 @@
 <?php
 
-    if(isset($_GET['kode'])){
-        $sql_cek = "SELECT * from data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode WHERE nip='".$_GET['kode']."'";
-        $query_cek = mysqli_query($koneksi, $sql_cek);
-        $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
-    }
+if (isset($_GET['kode'])) {
+    $sql_cek = "SELECT * from data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode WHERE id_pegawai='" . $_GET['kode'] . "'";
+    $query_cek = mysqli_query($koneksi, $sql_cek);
+    $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH);
+}
 ?>
 <div class="row">
     <div class="col-md-12">
@@ -44,10 +44,10 @@
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b>No HP</b>
+                                <b>Masa Kerja</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['no_hp']; ?>
+                                <?php echo $data_cek['masa_kerja']; ?>
                             </td>
                         </tr>
                         <tr>
@@ -100,18 +100,18 @@
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor'? 'SK Pengangkatan Pertama':'SK Pengangkatan CPNS';?></b>
+                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Pertama' : 'SK Pengangkatan CPNS'; ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpp'] == NULL ?'-':date('d F Y', strtotime($data_cek['skpp'])); ?>
+                                <?= $data_cek['skpp'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpp'])); ?>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor'? 'SK Pengangkatan Terakhir':'SK Pensiun';?></b>
+                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Terakhir' : 'SK Pensiun'; ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpt'] == NULL ?'-':date('d F Y', strtotime($data_cek['skpt'])); ?>
+                                <?= $data_cek['skpt'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpt'])); ?>
                             </td>
                         </tr>
                     </tbody>
@@ -119,8 +119,7 @@
                 <div class="card-footer">
                     <a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
 
-                    <a href="./report/cetak-pegawai.php?nip=<?php echo $data_cek['nip']; ?>" target=" _blank"
-                        title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
+                    <a href="./report/cetak-pegawai.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target=" _blank" title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>
