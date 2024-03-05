@@ -101,7 +101,6 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo $data['jabatan_terakhir']; ?>
                         </td>
                     </tr>
-                    <br>
                 <?php endwhile; ?>
             </tbody>
         </table>

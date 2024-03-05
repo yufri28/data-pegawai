@@ -213,7 +213,7 @@
                         </li>
 
                         <?php
-          				} elseif($data_level=="Sekretaris"){
+          				} elseif($data_level=="Operator"){
           				?>
 
                         <li class="nav-item">
@@ -234,8 +234,58 @@
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <?php if (isset($_GET['page']) && ($_GET['page'] == 'data-pensiun' || $_GET['page'] == 'data-mutasi' || $_GET['page'] == 'data-pendidikan' || $_GET['page'] == 'data-golongan' || $_GET['page'] == 'data-jabatan')): ?>
+                            <a href="#" class="nav-link active">
+                                <?php else: ?>
+                                <a href="#" class="nav-link">
+                                    <?php endif; ?>
+                                    <i class="nav-icon fas fa-database"></i>
+                                    <p>
+                                        Master Data
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
 
-                        <li class="nav-header">Setting</li>
+                                <ul class="nav nav-treeview nav-pills nav-sidebar">
+                                    <li class="nav-item">
+                                        <a href="?page=data-pensiun"
+                                            class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'data-pensiun' ? 'active':''):''?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Pensiun</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=data-mutasi"
+                                            class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'data-mutasi' ? 'active':''):''?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Mutasi</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=data-pendidikan"
+                                            class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'data-pendidikan' ? 'active':''):''?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Pendidikan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=data-golongan"
+                                            class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'data-golongan' ? 'active':''):''?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Golongan</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="?page=data-jabatan"
+                                            class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'data-jabatan' ? 'active':''):''?>">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Data Jabatan</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                        </li>
+                        <li class="nav-header">Logout</li>
 
                         <?php
 							}
@@ -277,8 +327,8 @@
               	case 'admin':
                   include "home/admin.php";
                   break;
-				case 'sekretaris':
-                  include "home/sekretaris.php";
+				case 'operator':
+                  include "home/operator.php";
 				  break;
 
 				//Pengguna
@@ -430,8 +480,8 @@
           if($data_level=="Administrator"){
               include "home/admin.php";
               }
-          elseif($data_level=="Sekretaris"){
-              include "home/sekretaris.php";
+          elseif($data_level=="Operator"){
+              include "home/operator.php";
               }
           }
     ?>

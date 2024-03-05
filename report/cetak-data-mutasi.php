@@ -102,7 +102,6 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo $data['jenis_mutasi']; ?>
                         </td>
                     </tr>
-                    <br>
                 <?php endwhile; ?>
             </tbody>
         </table>

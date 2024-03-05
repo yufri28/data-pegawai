@@ -102,7 +102,6 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
                             <?php echo 'Rp. ' . number_format($data['jumlah_gaji'], 0, ',', '.'); ?>
                         </td>
                     </tr>
-                    <br>
                 <?php endwhile; ?>
             </tbody>
         </table>

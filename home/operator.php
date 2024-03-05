@@ -54,7 +54,7 @@
             <div class="icon">
                 <i class="ion ion-person-add"></i>
             </div>
-            <a href="index.php?page=data-santri" class="small-box-footer">Selengkapnya
+            <a href="index.php?page=data-pegawai" class="small-box-footer">Selengkapnya
                 <i class="fas fa-arrow-circle-right"></i>
             </a>
         </div>
@@ -73,7 +73,7 @@
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Informasi
+            <a href="#" class="small-box-footer">-
             </a>
         </div>
     </div>
@@ -91,7 +91,7 @@
             <div class="icon">
                 <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">Informasi
+            <a href="#" class="small-box-footer">-
             </a>
         </div>
     </div>
@@ -109,7 +109,7 @@
             <div class="icon">
                 <i class="ion ion-android-happy"></i>
             </div>
-            <a href="#" class="small-box-footer">Informasi
+            <a href="#" class="small-box-footer">-
             </a>
         </div>
     </div>

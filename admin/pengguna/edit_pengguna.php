@@ -8,64 +8,67 @@
 ?>
 
 <div class="card card-success">
-	<div class="card-header">
-		<h3 class="card-title">
-			<i class="fa fa-edit"></i> Ubah Data</h3>
-	</div>
-	<form action="" method="post" enctype="multipart/form-data">
-		<div class="card-body">
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fa fa-edit"></i> Ubah Data
+        </h3>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="card-body">
 
-			<input type='hidden' class="form-control" name="id_pengguna" value="<?php echo $data_cek['id_pengguna']; ?>"
-			 readonly/>
+            <input type='hidden' class="form-control" name="id_pengguna" value="<?php echo $data_cek['id_pengguna']; ?>"
+                readonly />
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nama User</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna" value="<?php echo $data_cek['nama_pengguna']; ?>"
-					/>
-				</div>
-			</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nama User</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="nama_pengguna" name="nama_pengguna"
+                        value="<?php echo $data_cek['nama_pengguna']; ?>" />
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Username</label>
-				<div class="col-sm-6">
-					<input type="text" class="form-control" id="username" name="username" value="<?php echo $data_cek['username']; ?>"
-					/>
-				</div>
-			</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" id="username" name="username"
+                        value="<?php echo $data_cek['username']; ?>" />
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Password</label>
-				<div class="col-sm-6">
-					<input type="password" class="form-control" id="pass" name="password" value="<?php echo $data_cek['password']; ?>"
-					/>
-					<input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
-				</div>
-			</div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Password</label>
+                <div class="col-sm-6">
+                    <input type="password" class="form-control" id="pass" name="password"
+                        value="<?php echo $data_cek['password']; ?>" />
+                    <input id="mybutton" onclick="change()" type="checkbox" class="form-checkbox"> Lihat Password
+                </div>
+            </div>
 
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Level</label>
-				<div class="col-sm-4">
-					<select name="level" id="level" class="form-control">
-						<option value="">-- Pilih Level --</option>
-						<?php
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Level</label>
+                <div class="col-sm-4">
+                    <select name="level" id="level" class="form-control">
+                        <option value="">-- Pilih Level --</option>
+                        <?php
                 //menhecek data yg dipilih sebelumnya
                 if ($data_cek['level'] == "Administrator") echo "<option value='Administrator' selected>Administrator</option>";
                 else echo "<option value='Administrator'>Administrator</option>";
 
-                if ($data_cek['level'] == "Sekretaris") echo "<option value='Sekretaris' selected>Sekretaris</option>";
-                else echo "<option value='Sekretaris'>Sekretaris</option>";
-            ?>
-					</select>
-				</div>
-			</div>
+                if ($data_cek['level'] == "Operator") echo "<option value='Operator' selected>Operator</option>";
+                else echo "<option value='Operator'>Operator</option>";
+                if ($data_cek['level'] == "Kadis") echo "<option value='Kadis' selected>Kadis</option>";
+                else echo "<option value='Kadis'>Kadis</option>";
+                ?>
+                    </select>
+                </div>
+            </div>
 
-		</div>
-		<div class="card-footer">
-			<input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
-			<a href="?page=data-pengguna" title="Kembali" class="btn btn-secondary">Batal</a>
-		</div>
-	</form>
+        </div>
+        <div class="card-footer">
+            <input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
+            <a href="?page=data-pengguna" title="Kembali" class="btn btn-secondary">Batal</a>
+        </div>
+    </form>
 </div>
 
 
@@ -100,19 +103,15 @@
 ?>
 
 <script type="text/javascript">
-    function change()
-    {
+function change() {
     var x = document.getElementById('pass').type;
 
-    if (x == 'password')
-    {
+    if (x == 'password') {
         document.getElementById('pass').type = 'text';
         document.getElementById('mybutton').innerHTML;
-    }
-    else
-    {
+    } else {
         document.getElementById('pass').type = 'password';
         document.getElementById('mybutton').innerHTML;
     }
-    }
+}
 </script>

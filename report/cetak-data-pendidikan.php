@@ -92,36 +92,35 @@ $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH); {
             </thead>
             <tbody>
                 <?php while ($data = mysqli_fetch_array($query_tampil, MYSQLI_BOTH)) : ?>
+                    <tr>
+                        <td>
+                            <?php echo $data['nip']; ?>
+                        </td>
 
-                    <td>
-                        <?php echo $data['nip']; ?>
-                    </td>
+                        <td>
+                            <?php echo $data['nama']; ?>
+                        </td>
 
-                    <td>
-                        <?php echo $data['nama']; ?>
-                    </td>
+                        <td>
+                            <?php echo $data['tahun_lulus']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['jurusan']; ?>
+                        </td>
 
-                    <td>
-                        <?php echo $data['tahun_lulus']; ?>
-                    </td>
-                    <td>
-                        <?php echo $data['jurusan']; ?>
-                    </td>
-
-                    <td>
-                        <?php echo $data['pendidikan_terakhir']; ?>
-                    </td>
-                    <td>
-                        <?php echo $data['lembaga_pendidikan']; ?>
-                    </td>
-                    <td>
-                        <?= $data['kursus_diklat'] != NULL ? $data['kursus_diklat'] : '-'; ?>
-                    </td>
-                    <td>
-                        <?= $data['pend_perjenjangan'] != NULL ? $data['pend_perjenjangan'] : '-'; ?>
-                    </td>
+                        <td>
+                            <?php echo $data['pendidikan_terakhir']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['lembaga_pendidikan']; ?>
+                        </td>
+                        <td>
+                            <?= $data['kursus_diklat'] != NULL ? $data['kursus_diklat'] : '-'; ?>
+                        </td>
+                        <td>
+                            <?= $data['pend_perjenjangan'] != NULL ? $data['pend_perjenjangan'] : '-'; ?>
+                        </td>
                     </tr>
-                    <br>
                 <?php endwhile; ?>
             </tbody>
         </table>
