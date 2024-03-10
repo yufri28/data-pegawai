@@ -19,6 +19,7 @@
                         <th style="width: 440px;">Nama User</th>
                         <th style="width: 350px;"> Username</th>
                         <th style="width: 340px;">Level</th>
+                        <th style="width: 340px;">Unit</th>
                         <th style="width: 230px;">Aksi</th>
                     </tr>
                 </thead>
@@ -26,32 +27,38 @@
 
                     <?php
                     $no = 1;
-                    $sql = $koneksi->query("select * from tb_pengguna");
+                    $sql = $koneksi->query("SELECT * FROM tb_pengguna tp JOIN tb_unit u WHERE u.id_unit=tp.f_id_unit");
                     while ($data = $sql->fetch_assoc()) {
                     ?>
 
-                        <tr>
-                            <td>
-                                <?php echo $no++; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['nama_pengguna']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['username']; ?>
-                            </td>
-                            <td>
-                                <?php echo $data['level']; ?>
-                            </td>
-                            <td>
-                                <a href="?page=edit-pengguna&kode=<?php echo $data['id_pengguna']; ?>" title="Ubah" class="btn btn-success btn-sm">
-                                    <i class="fa fa-edit"></i>
-                                </a>
-                                <a href="?page=del-pengguna&kode=<?php echo $data['id_pengguna']; ?>" onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus" class="btn btn-danger btn-sm">
-                                    <i class="fa fa-trash"></i>
-                                    </>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <?php echo $no++; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nama_pengguna']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['username']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['level']; ?>
+                        </td>
+                        <td>
+                            <?php echo $data['nama_unit']; ?>
+                        </td>
+                        <td>
+                            <a href="?page=edit-pengguna&kode=<?php echo $data['id_pengguna']; ?>" title="Ubah"
+                                class="btn btn-success btn-sm">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="?page=del-pengguna&kode=<?php echo $data['id_pengguna']; ?>"
+                                onclick="return confirm('Apakah anda yakin hapus data ini ?')" title="Hapus"
+                                class="btn btn-danger btn-sm">
+                                <i class="fa fa-trash"></i>
+                                </>
+                        </td>
+                    </tr>
 
                     <?php
                     }

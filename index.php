@@ -114,6 +114,8 @@
                         <!-- Level  -->
                         <?php
 						if ($data_level=="Administrator"){
+                            $sql = $koneksi->query("SELECT COUNT(*) AS jumlah FROM tb_pengajuan WHERE verifikasi='0'");
+                            $pengajuan_baru = mysqli_fetch_assoc($sql);
 						?>
                         <li class="nav-item">
                             <a href="index.php" class="nav-link <?=!isset($_GET['page']) ? 'active':''?>">
@@ -129,6 +131,15 @@
                                 <i class="nav-icon far fa fa-users"></i>
                                 <p>
                                     Data Pegawai
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=pengajuan"
+                                class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'pengajuan' ? 'active':''):''?>">
+                                <i class="nav-icon far fa fa-star"></i>
+                                <p>
+                                    Pengajuan Pangkat (<?=$pengajuan_baru['jumlah'];?>)
                                 </p>
                             </a>
                         </li>
@@ -231,6 +242,15 @@
                                 <i class="nav-icon far fa fa-users"></i>
                                 <p>
                                     Data Pegawai
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="?page=pengajuan"
+                                class="nav-link <?=isset($_GET['page']) ? ($_GET['page'] == 'pengajuan' ? 'active':''):''?>">
+                                <i class="nav-icon far fa fa-star"></i>
+                                <p>
+                                    Pengajuan Pangkat
                                 </p>
                             </a>
                         </li>
@@ -461,6 +481,23 @@
 					include "admin/jabatan/view_jabatan.php";
 					break;
 
+                //pengajuan
+				case 'pengajuan':
+					include "admin/pengajuan/data_pengajuan.php";
+					break;
+				case 'add-pengajuan':
+					include "admin/pengajuan/add_pengajuan.php";
+					break;
+				case 'edit-pengajuan':
+					include "admin/pengajuan/edit_pengajuan.php";
+					break;
+				case 'del-pengajuan':
+					include "admin/pengajuan/del_pengajuan.php";
+					break;
+				case 'view-pengajuan':
+					include "admin/pengajuan/view_pengajuan.php";
+					break;    
+
 				//Profil
 				case 'data-profil':
 					include "admin/profil/data_profil.php";
@@ -477,7 +514,7 @@
           }
       }else{
         // Auto Halaman Home Pengguna
-          if($data_level=="Administrator"){
+          if($data_level=="Administrator" || $data_level == "Kadis"){
               include "home/admin.php";
               }
           elseif($data_level=="Operator"){

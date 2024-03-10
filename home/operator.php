@@ -9,7 +9,13 @@
 ?>
 <?php
 		}
-	$sql = $koneksi->query("SELECT count(nip) as lokal from data_pegawai");
+    $ses_unit = $_SESSION['ses_unit'];
+
+    if($ses_unit == 1){
+        $sql = $koneksi->query("SELECT count(nip) AS lokal FROM data_pegawai");
+    }else{
+        $sql = $koneksi->query("SELECT count(nip) AS lokal FROM data_pegawai WHERE f_id_unit='$ses_unit'");
+    }
 	while ($data= $sql->fetch_assoc()) {
 	
 		$lokal=$data['lokal'];
@@ -17,7 +23,12 @@
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(nip) as tetap from data_pegawai where status='Tetap'");
+
+    if($ses_unit == 1){
+        $sql = $koneksi->query("SELECT count(nip) AS tetap FROM data_pegawai WHERE status='Tetap'");
+    }else{
+        $sql = $koneksi->query("SELECT count(nip) AS tetap FROM data_pegawai WHERE status='Tetap' AND f_id_unit='$ses_unit'");
+    }
 	while ($data= $sql->fetch_assoc()) {
 	
 		$tetap=$data['tetap'];
@@ -25,7 +36,12 @@
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(nip) as honor from data_pegawai where status='Honor'");
+
+    if($ses_unit == 1){
+        $sql = $koneksi->query("SELECT count(nip) AS honor FROM data_pegawai WHERE status='Honor'");
+    }else{
+        $sql = $koneksi->query("SELECT count(nip) AS honor FROM data_pegawai WHERE status='Honor' AND f_id_unit='$ses_unit'");
+    }
 	while ($data= $sql->fetch_assoc()) {
 	
 		$honor=$data['honor'];
@@ -33,7 +49,7 @@
 ?>
 
 <?php
-	$sql = $koneksi->query("SELECT count(id_pengguna) as boyong from tb_pengguna");
+	$sql = $koneksi->query("SELECT count(id_pengguna) AS boyong FROM tb_pengguna");
 	while ($data= $sql->fetch_assoc()) {
 	
 		$boyong=$data['boyong'];
@@ -96,6 +112,7 @@
         </div>
     </div>
     <!-- ./col -->
+    <?php if($ses_unit == 1):?>
     <div class="col-lg-3 col-6">
         <!-- small box -->
         <div class="small-box bg-warning">
@@ -113,3 +130,4 @@
             </a>
         </div>
     </div>
+    <?php endif;?>

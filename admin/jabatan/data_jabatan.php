@@ -63,7 +63,7 @@
                 <?php endif; ?>
             </div>
             <br>
-            <table id="example1" class="table table-bordered table-striped" style="width:100%;">
+            <table id="example1" class="table table-bordered nowrap table-striped" style="width:100%;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -79,21 +79,61 @@
 
                     <?php
                     $no = 1;
-                    if (isset($_GET['ip'])) {
-                        $id_periode =  base64_decode($_GET['ip']);
-                        $sql = $koneksi->query("SELECT *, dj.nama AS nama_jabatan FROM data_jabatan dj JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai WHERE dpg.id_periode='$id_periode'");
-                    }elseif(isset($_GET['gol'])) {
-                        $gol =  base64_decode($_GET['gol']);
-                        $sql = $koneksi->query(
-                            "SELECT *, dj.nama AS nama_jabatan 
-                            FROM data_jabatan dj 
-                            JOIN data_pegawai dpg 
-                            ON dj.id_pegawai=dpg.id_pegawai 
-                            JOIN data_golongan dg ON dg.id_pegawai=dpg.id_pegawai 
-                            WHERE LOWER(dg.golongan) = LOWER('$gol')");
-                    }else {
-                        $sql = $koneksi->query("SELECT *, dj.nama AS nama_jabatan FROM data_jabatan dj JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai");
+                    $ses_unit = $_SESSION['ses_unit'];
+
+                    if($ses_unit == 1){
+                        if (isset($_GET['ip'])) {
+                            $id_periode =  base64_decode($_GET['ip']);
+                            $sql = $koneksi->query(
+                                    "SELECT *, dj.nama AS nama_jabatan 
+                                    FROM data_jabatan dj 
+                                    JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai 
+                                    WHERE dpg.id_periode='$id_periode'");
+                        }elseif(isset($_GET['gol'])) {
+                            $gol =  base64_decode($_GET['gol']);
+                            $sql = $koneksi->query(
+                                "SELECT *, dj.nama AS nama_jabatan 
+                                FROM data_jabatan dj 
+                                JOIN data_pegawai dpg 
+                                ON dj.id_pegawai=dpg.id_pegawai 
+                                JOIN data_golongan dg ON dg.id_pegawai=dpg.id_pegawai 
+                                WHERE LOWER(dg.golongan) = LOWER('$gol')");
+                        }else {
+                            $sql = $koneksi->query(
+                                "SELECT *, dj.nama AS nama_jabatan 
+                                FROM data_jabatan dj 
+                                JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai");
+                        }
+                    }else{
+                        if (isset($_GET['ip'])) {
+                            $id_periode =  base64_decode($_GET['ip']);
+                            $sql = $koneksi->query(
+                                "SELECT *, dj.nama AS nama_jabatan 
+                                FROM data_jabatan dj 
+                                JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai
+                                JOIN tb_unit u ON u.id_unit=dpg.f_id_unit 
+                                WHERE dpg.id_periode='$id_periode' AND dpg.f_id_unit='$ses_unit'");
+                        }elseif(isset($_GET['gol'])) {
+                            $gol =  base64_decode($_GET['gol']);
+                            $sql = $koneksi->query(
+                                "SELECT *, dj.nama AS nama_jabatan 
+                                FROM data_jabatan dj 
+                                JOIN data_pegawai dpg 
+                                ON dj.id_pegawai=dpg.id_pegawai 
+                                JOIN data_golongan dg ON dg.id_pegawai=dpg.id_pegawai
+                                JOIN tb_unit u ON u.id_unit=dpg.f_id_unit
+                                WHERE LOWER(dg.golongan) = LOWER('$gol') AND dpg.f_id_unit='$ses_unit'");
+                        }else {
+                            $sql = $koneksi->query(
+                                "SELECT *, dj.nama AS nama_jabatan 
+                                FROM data_jabatan dj 
+                                JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai
+                                JOIN tb_unit u ON u.id_unit=dpg.f_id_unit 
+                                WHERE dpg.f_id_unit='$ses_unit'");
+                        }
                     }
+
+                   
                     while ($data = $sql->fetch_assoc()) {
                     ?>
                     <tr>

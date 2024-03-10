@@ -5,6 +5,9 @@
         $query_cek = mysqli_query($koneksi, $sql_cek);
         $data_cek = mysqli_fetch_array($query_cek,MYSQLI_BOTH);
     }
+
+    $get_data_unit = "SELECT * FROM tb_unit";
+    $data_unit = mysqli_query($koneksi, $get_data_unit);
 ?>
 
 <div class="card card-success">
@@ -63,6 +66,19 @@
                 </div>
             </div>
 
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Unit</label>
+                <div class="col-sm-5">
+                    <select required name="id_unit" id="id_unit" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_unit as $key => $unit) : ?>
+                        <option <?= $data_cek['f_id_unit'] == $unit['id_unit'] ? 'selected' : ''; ?>
+                            value="<?= $unit['id_unit']; ?>"><?= $unit['nama_unit']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+
         </div>
         <div class="card-footer">
             <input type="submit" name="Ubah" value="Simpan" class="btn btn-success">
@@ -80,7 +96,8 @@
         nama_pengguna='".$_POST['nama_pengguna']."',
         username='".$_POST['username']."',
         password='".$_POST['password']."',
-        level='".$_POST['level']."'
+        level='".$_POST['level']."',
+        f_id_unit='".$_POST['id_unit']."'
         WHERE id_pengguna='".$_POST['id_pengguna']."'";
     $query_ubah = mysqli_query($koneksi, $sql_ubah);
     mysqli_close($koneksi);

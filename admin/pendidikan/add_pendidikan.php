@@ -1,6 +1,12 @@
 <?php
 
-$get_data_pegawai = "SELECT * FROM data_pegawai";
+$ses_unit = $_SESSION['ses_unit'];
+if($ses_unit == 1){
+	$get_data_pegawai = "SELECT * FROM data_pegawai";
+}else{
+	$get_data_pegawai = "SELECT * FROM data_pegawai WHERE f_id_unit='$ses_unit'";
+}
+
 $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
 
 ?>
@@ -18,7 +24,7 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
                     <select required name="id_pegawai" id="id_pegawai" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_pegawai as $key => $pegawai) : ?>
-                            <option value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
+                        <option value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -26,7 +32,8 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tahun Lulus</label>
                 <div class="col-sm-5">
-                    <input required class="form-control" type="number" placeholder="Tahun lulus" id="tahun_lulus" name="tahun_lulus" min="1900" max="2099" step="1">
+                    <input required class="form-control" type="number" placeholder="Tahun lulus" id="tahun_lulus"
+                        name="tahun_lulus" min="1900" max="2099" step="1">
                 </div>
             </div>
             <div class="form-group row">
@@ -56,14 +63,16 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Lembaga Pendidikan</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="lembaga_pendidikan" name="lembaga_pendidikan" placeholder="Nama lembaga pendidikan" required>
+                    <input type="text" class="form-control" id="lembaga_pendidikan" name="lembaga_pendidikan"
+                        placeholder="Nama lembaga pendidikan" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Kursus/Diklat</label>
                 <div class="col-sm-5">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Kursus atau Diklat" name="kursus_diklat" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Kursus atau Diklat" name="kursus_diklat"
+                            style="height: 100px"></textarea>
                     </div>
                 </div>
             </div>
@@ -71,7 +80,8 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
                 <label class="col-sm-2 col-form-label">Pendidikan Perjenjangan</label>
                 <div class="col-sm-5">
                     <div class="form-floating">
-                        <textarea class="form-control" placeholder="Pendidikan Perjenjangan" name="pend_perjenjangan" style="height: 100px"></textarea>
+                        <textarea class="form-control" placeholder="Pendidikan Perjenjangan" name="pend_perjenjangan"
+                            style="height: 100px"></textarea>
                     </div>
                 </div>
             </div>

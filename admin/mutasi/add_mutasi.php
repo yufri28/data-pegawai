@@ -1,50 +1,55 @@
 <?php
-
-$get_data_pegawai = "SELECT * FROM data_pegawai";
+$ses_unit = $_SESSION['ses_unit'];
+if($ses_unit == 1){
+	$get_data_pegawai = "SELECT * FROM data_pegawai";
+}else{
+	$get_data_pegawai = "SELECT * FROM data_pegawai WHERE f_id_unit='$ses_unit'";
+}
 $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
 
 ?>
 <div class="card card-primary">
-	<div class="card-header">
-		<h3 class="card-title">
-			<i class="fa fa-edit"></i> Tambah Data
-		</h3>
-	</div>
-	<form action="" method="post" enctype="multipart/form-data">
-		<div class="card-body">
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Nama Pegawai</label>
-				<div class="col-sm-5">
-					<select required name="id_pegawai" id="id_pegawai" class="form-control">
-						<option value="">- Pilih -</option>
-						<?php foreach ($data_pegawai as $key => $pegawai) : ?>
-							<option value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
-						<?php endforeach; ?>
-					</select>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Tempat Mutasi</label>
-				<div class="col-sm-5">
-					<input type="text" class="form-control" id="tempat_mutasi" name="tempat_mutasi" placeholder="Tempat Mutasi" required>
-				</div>
-			</div>
-			<div class="form-group row">
-				<label class="col-sm-2 col-form-label">Jenis Mutasi</label>
-				<div class="col-sm-5">
-					<select required id="jenis_mutasi" name="jenis_mutasi" class="form-control">
-						<option value="">- Pilih -</option>
-						<option value="Dinas Lama">Dinas Lama</option>
-						<option value="Dinas Baru">Dinas Baru</option>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="card-footer">
-			<input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
-			<a href="?page=data-mutasi" title="Kembali" class="btn btn-secondary">Batal</a>
-		</div>
-	</form>
+    <div class="card-header">
+        <h3 class="card-title">
+            <i class="fa fa-edit"></i> Tambah Data
+        </h3>
+    </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Nama Pegawai</label>
+                <div class="col-sm-5">
+                    <select required name="id_pegawai" id="id_pegawai" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_pegawai as $key => $pegawai) : ?>
+                        <option value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Tempat Mutasi</label>
+                <div class="col-sm-5">
+                    <input type="text" class="form-control" id="tempat_mutasi" name="tempat_mutasi"
+                        placeholder="Tempat Mutasi" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Jenis Mutasi</label>
+                <div class="col-sm-5">
+                    <select required id="jenis_mutasi" name="jenis_mutasi" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <option value="Dinas Lama">Dinas Lama</option>
+                        <option value="Dinas Baru">Dinas Baru</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
+            <a href="?page=data-mutasi" title="Kembali" class="btn btn-secondary">Batal</a>
+        </div>
+    </form>
 </div>
 
 <?php

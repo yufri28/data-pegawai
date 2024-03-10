@@ -1,7 +1,7 @@
 <?php
 
 if (isset($_GET['kode'])) {
-    $sql_cek = "SELECT * from data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode WHERE id_pegawai='" . $_GET['kode'] . "'";
+    $sql_cek = "SELECT * FROM data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode JOIN tb_unit u ON u.id_unit=dp.f_id_unit WHERE id_pegawai='" . $_GET['kode'] . "'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
     $data_cek = mysqli_fetch_array($query_cek, MYSQLI_BOTH);
 }
@@ -114,12 +114,20 @@ if (isset($_GET['kode'])) {
                                 <?= $data_cek['skpt'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpt'])); ?>
                             </td>
                         </tr>
+                        <tr>
+                            <td style="width: 150px">
+                                <b>Unit</b>
+                            </td>
+                            <td>:
+                                <?php echo $data_cek['nama_unit']; ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">
                     <a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
-
-                    <a href="./report/cetak-pegawai.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target=" _blank" title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
+                    <a href="./report/cetak-pegawai.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target=" _blank"
+                        title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>

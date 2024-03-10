@@ -8,6 +8,8 @@ if (isset($_GET['kode'])) {
 $get_data_periode = "SELECT * FROM periode";
 $data_periode = mysqli_query($koneksi, $get_data_periode);
 
+$get_data_unit = "SELECT * FROM tb_unit WHERE id_unit != 1";
+$data_unit = mysqli_query($koneksi, $get_data_unit);
 ?>
 
 <div class="card card-success">
@@ -22,15 +24,18 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">NIP</label>
                 <div class="col-sm-5">
-                    <input type="hidden" value="<?= $data_cek['id_pegawai']; ?>" class="form-control" id="id_pegawai" name="id_pegawai" required>
-                    <input type="text" value="<?= $data_cek['nip']; ?>" class="form-control" id="nip" name="nip" placeholder="NIP" required>
+                    <input type="hidden" value="<?= $data_cek['id_pegawai']; ?>" class="form-control" id="id_pegawai"
+                        name="id_pegawai" required>
+                    <input type="text" value="<?= $data_cek['nip']; ?>" class="form-control" id="nip" name="nip"
+                        placeholder="NIP" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Pegawai</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['nama']; ?>" class="form-control" id="nama" name="nama" placeholder="Nama Pegawai" required>
+                    <input type="text" value="<?= $data_cek['nama']; ?>" class="form-control" id="nama" name="nama"
+                        placeholder="Nama Pegawai" required>
                 </div>
             </div>
 
@@ -49,20 +54,23 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tempat Lahir</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['tempat_lahir']; ?>" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required>
+                    <input type="text" value="<?= $data_cek['tempat_lahir']; ?>" class="form-control" id="tempat_lahir"
+                        name="tempat_lahir" placeholder="Tempat Lahir" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                 <div class="col-sm-5">
-                    <input type="date" value="<?= $data_cek['tanggal_lahir']; ?>" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" required>
+                    <input type="date" value="<?= $data_cek['tanggal_lahir']; ?>" class="form-control"
+                        id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Masa Kerja</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" value="<?= $data_cek['masa_kerja']; ?>" id="masa_kerja" name="masa_kerja" placeholder="Masa Kerja" required>
+                    <input type="text" class="form-control" value="<?= $data_cek['masa_kerja']; ?>" id="masa_kerja"
+                        name="masa_kerja" placeholder="Masa Kerja" required>
                 </div>
             </div>
 
@@ -93,7 +101,8 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-5">
-                    <textarea class="form-control" name="alamat" id="alamat" rows="3"><?= $data_cek['alamat']; ?></textarea>
+                    <textarea class="form-control" name="alamat" id="alamat"
+                        rows="3"><?= $data_cek['alamat']; ?></textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -102,7 +111,8 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
                     <select required name="id_periode" id="id_periode" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_periode as $key => $periode) : ?>
-                            <option <?= $data_cek['id_periode'] == $periode['id_periode'] ? 'selected' : ''; ?> value="<?= $periode['id_periode']; ?>"><?= $periode['tahun']; ?></option>
+                        <option <?= $data_cek['id_periode'] == $periode['id_periode'] ? 'selected' : ''; ?>
+                            value="<?= $periode['id_periode']; ?>"><?= $periode['tahun']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -110,15 +120,30 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">SKPP</label>
                 <div class="col-sm-5">
-                    <input type="date" class="form-control" value="<?= $data_cek['skpp']; ?>" id="skpp" name="skpp" required>
-                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS (PNS)</i></small>
+                    <input type="date" class="form-control" value="<?= $data_cek['skpp']; ?>" id="skpp" name="skpp"
+                        required>
+                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS
+                            (PNS)</i></small>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">SKPT</label>
                 <div class="col-sm-5">
-                    <input type="date" class="form-control" value="<?= $data_cek['skpt']; ?>" id="skpt" name="skpt" required>
+                    <input type="date" class="form-control" value="<?= $data_cek['skpt']; ?>" id="skpt" name="skpt"
+                        required>
                     <small><i>Tanggal SK Pengangkatan Terakhir (Honor) atau Tanggal SK Pensiun (PNS)</i></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Unit</label>
+                <div class="col-sm-5">
+                    <select required name="id_unit" id="id_unit" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_unit as $key => $unit) : ?>
+                        <option <?= $data_cek['f_id_unit'] == $unit['id_unit'] ? 'selected' : ''; ?>
+                            value="<?= $unit['id_unit']; ?>"><?= $unit['nama_unit']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
         </div>
@@ -144,7 +169,8 @@ if (isset($_POST['Ubah'])) {
 		status='" . htmlspecialchars($_POST['status']) . "',
 		id_periode='" . htmlspecialchars($_POST['id_periode']) . "',
         skpp='" . htmlspecialchars($_POST['skpp']) . "',
-        skpt='" . htmlspecialchars($_POST['skpt']) . "'
+        skpt='" . htmlspecialchars($_POST['skpt']) . "',
+        f_id_unit='" . htmlspecialchars($_POST['id_unit']) . "'
 		WHERE id_pegawai='" . htmlspecialchars($_POST['id_pegawai']) . "'";
 
     $query_ubah = mysqli_query($koneksi, $sql_ubah);

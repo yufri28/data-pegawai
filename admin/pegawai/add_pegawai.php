@@ -3,6 +3,16 @@
 $get_data_periode = "SELECT * FROM periode";
 $data_periode = mysqli_query($koneksi, $get_data_periode);
 
+$ses_unit = $_SESSION['ses_unit'];
+
+if($ses_unit == 1){
+    $get_data_unit = "SELECT * FROM tb_unit WHERE id_unit != 1";
+}else{
+    $get_data_unit = "SELECT * FROM tb_unit WHERE id_unit = '$ses_unit'";
+}
+
+$data_unit = mysqli_query($koneksi, $get_data_unit);
+
 ?>
 <div class="card card-primary">
     <div class="card-header">
@@ -42,20 +52,23 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tempat Lahir</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required>
+                    <input type="text" class="form-control" id="tempat_lahir" name="tempat_lahir"
+                        placeholder="Tempat Lahir" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                 <div class="col-sm-5">
-                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" required>
+                    <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir"
+                        placeholder="Tanggal Lahir" required>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Masa Kerja</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" id="masa_kerja" name="masa_kerja" placeholder="Masa Kerja" required>
+                    <input type="text" class="form-control" id="masa_kerja" name="masa_kerja" placeholder="Masa Kerja"
+                        required>
                 </div>
             </div>
 
@@ -95,7 +108,7 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
                     <select required name="id_periode" id="id_periode" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_periode as $key => $periode) : ?>
-                            <option value="<?= $periode['id_periode']; ?>"><?= $periode['tahun']; ?></option>
+                        <option value="<?= $periode['id_periode']; ?>"><?= $periode['tahun']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -104,7 +117,8 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
                 <label class="col-sm-2 col-form-label">SKPP</label>
                 <div class="col-sm-5">
                     <input type="date" class="form-control" id="skpp" name="skpp" required>
-                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS (PNS)</i></small>
+                    <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS
+                            (PNS)</i></small>
                 </div>
             </div>
             <div class="form-group row">
@@ -112,6 +126,17 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
                 <div class="col-sm-5">
                     <input type="date" class="form-control" id="skpt" name="skpt" required>
                     <small><i>Tanggal SK Pengangkatan Terakhir (Honor) atau Tanggal SK Pensiun (PNS)</i></small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Unit</label>
+                <div class="col-sm-5">
+                    <select required name="id_unit" id="id_unit" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_unit as $key => $unit) : ?>
+                        <option value="<?= $unit['id_unit']; ?>"><?= $unit['nama_unit']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
         </div>
@@ -124,7 +149,7 @@ $data_periode = mysqli_query($koneksi, $get_data_periode);
 
 <?php
 if (isset($_POST['Simpan'])) {
-    $sql_simpan = "INSERT INTO data_pegawai (nip, nama, alamat, masa_kerja, tempat_lahir, tanggal_lahir, jk, agama, status,id_periode,skpp,skpt) VALUES (
+    $sql_simpan = "INSERT INTO data_pegawai (nip, nama, alamat, masa_kerja, tempat_lahir, tanggal_lahir, jk, agama, status,id_periode,skpp,skpt,f_id_unit) VALUES (
 			'" . htmlspecialchars($_POST['nip']) . "',
 			'" . htmlspecialchars($_POST['nama']) . "',
 			'" . htmlspecialchars($_POST['alamat']) . "',
@@ -136,7 +161,8 @@ if (isset($_POST['Simpan'])) {
 			'" . htmlspecialchars($_POST['status']) . "',
             '" . htmlspecialchars($_POST['id_periode']) . "',
             '" . htmlspecialchars($_POST['skpp']) . "',
-            '" . htmlspecialchars($_POST['skpt']) . "')";
+            '" . htmlspecialchars($_POST['skpt']) . "',
+            '" . htmlspecialchars($_POST['id_unit']) . "')";
     $query_simpan = mysqli_query($koneksi, $sql_simpan);
     mysqli_close($koneksi);
 

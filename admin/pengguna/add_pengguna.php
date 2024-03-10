@@ -1,3 +1,8 @@
+<?php 
+$get_data_unit = "SELECT * FROM tb_unit";
+$data_unit = mysqli_query($koneksi, $get_data_unit);
+?>
+
 <div class="card card-primary">
     <div class="card-header">
         <h3 class="card-title">
@@ -31,7 +36,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Level</label>
-                <div class="col-sm-4">
+                <div class="col-sm-6">
                     <select name="level" id="level" class="form-control">
                         <option>- Pilih -</option>
                         <option>Administrator</option>
@@ -40,7 +45,17 @@
                     </select>
                 </div>
             </div>
-
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Unit</label>
+                <div class="col-sm-6">
+                    <select required name="id_unit" id="id_unit" class="form-control">
+                        <option value="">- Pilih -</option>
+                        <?php foreach ($data_unit as $key => $unit) : ?>
+                        <option value="<?= $unit['id_unit']; ?>"><?= $unit['nama_unit']; ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
         </div>
         <div class="card-footer">
             <input type="submit" name="Simpan" value="Simpan" class="btn btn-info">
@@ -51,13 +66,14 @@
 
 <?php
 
-    if (isset ($_POST['Simpan'])){
+    if (isset($_POST['Simpan'])){
     //mulai proses simpan data
-        $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna,username,password,level) VALUES (
+        $sql_simpan = "INSERT INTO tb_pengguna (nama_pengguna,username,password,level,f_id_unit) VALUES (
         '".$_POST['nama_pengguna']."',
         '".$_POST['username']."',
         '".$_POST['password']."',
-        '".$_POST['level']."')";
+        '".$_POST['level']."',
+        '".$_POST['id_unit']."')";
         $query_simpan = mysqli_query($koneksi, $sql_simpan);
         mysqli_close($koneksi);
 

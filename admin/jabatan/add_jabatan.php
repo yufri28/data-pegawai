@@ -1,6 +1,11 @@
 <?php 
 
-$get_data_pegawai = "SELECT * FROM data_pegawai";
+$ses_unit = $_SESSION['ses_unit'];
+if($ses_unit == 1){
+	$get_data_pegawai = "SELECT * FROM data_pegawai";
+}else{
+	$get_data_pegawai = "SELECT * FROM data_pegawai WHERE f_id_unit='$ses_unit'";
+}
 $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
 
 ?>
