@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 10 Mar 2024 pada 18.18
+-- Waktu pembuatan: 11 Mar 2024 pada 17.57
 -- Versi server: 10.4.24-MariaDB
 -- Versi PHP: 8.1.6
 
@@ -130,7 +130,7 @@ CREATE TABLE `data_pegawai` (
 --
 
 INSERT INTO `data_pegawai` (`id_pegawai`, `nip`, `nama`, `alamat`, `masa_kerja`, `tempat_lahir`, `tanggal_lahir`, `jk`, `agama`, `status`, `id_periode`, `skpp`, `skpt`, `f_id_unit`) VALUES
-(1314, '194602101986031029', 'Lucky Frederich Koli, S.TP', '-', '34 Tahun 10 Bulan', 'TTS', '1964-02-10', 'Laki-Laki', 'Kristen', 'Tetap', 13, '1986-03-01', '2024-03-01', 2),
+(1314, '194602101986031029', 'Lucky Frederich Koli, S.TP', '-', '34 Tahun 10 Bulan', 'TTS', '1964-02-10', 'Laki-Laki', 'Kristen', 'Tetap', 13, '1986-03-01', '2024-03-01', 5),
 (1315, '196508191993032006', 'Ir. Agustina W. Soewarni ', '-', '28 Tahun 10 Bulan', 'Kupang', '1965-08-19', 'Perempuan', '', 'Tetap', 13, '1993-03-01', '2028-05-01', 2),
 (1316, '1970042919940310005', 'Nixon M. Balukh, SP. M.Si', '', '32 Tahun 0 Bulan ', 'Kupang', '1970-04-24', 'Laki-Laki', 'Kristen', 'Tetap', 13, '1933-03-01', '2028-05-01', 2),
 (1317, '196506031996031001', 'Ir. Robertus Ongo, MM', '-', '26 Tahun 10 Bulan ', 'Bajawa', '1965-06-03', 'Laki-Laki', '', 'Tetap', 13, '1996-03-01', '2023-07-01', 2),
@@ -228,6 +228,24 @@ INSERT INTO `periode` (`id_periode`, `tahun`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `tb_pangkat`
+--
+
+CREATE TABLE `tb_pangkat` (
+  `id_pangkat` int(11) NOT NULL,
+  `nama_pangkat` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_pangkat`
+--
+
+INSERT INTO `tb_pangkat` (`id_pangkat`, `nama_pangkat`) VALUES
+(1, 'Penyuluh pertanian ahli muda');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `tb_pengajuan`
 --
 
@@ -250,8 +268,7 @@ CREATE TABLE `tb_pengajuan` (
 --
 
 INSERT INTO `tb_pengajuan` (`id_pengajuan`, `pangkat_diajukan`, `dokumen`, `keterangan`, `tanggal_pengajuan`, `status`, `pesan_penolakan`, `f_id_pegawai`, `verifikasi`, `created_at`, `updated_at`) VALUES
-(10, 'Reguler (Fungsional Umum)', 'CETAK DATA PEGAWAI.pdf', '', '2024-03-11', 'terima', '', 1328, '1', '2024-03-10 17:08:03', '2024-03-10 17:17:11'),
-(11, 'Reguler (Fungsional Umum)', 'CETAK DATA PEGAWAI.pdf', '', '2024-03-11', 'tunggu', '', 1315, '0', '2024-03-10 17:14:21', '2024-03-10 17:14:21');
+(18, 'Penyuluh pertanian ahli muda', 'CETAK DATA PEGAWAI.pdf', '', '2024-03-12', 'terima', '', 1314, '1', '2024-03-11 16:55:40', '2024-03-11 16:56:47');
 
 -- --------------------------------------------------------
 
@@ -376,6 +393,12 @@ ALTER TABLE `periode`
   ADD PRIMARY KEY (`id_periode`);
 
 --
+-- Indeks untuk tabel `tb_pangkat`
+--
+ALTER TABLE `tb_pangkat`
+  ADD PRIMARY KEY (`id_pangkat`);
+
+--
 -- Indeks untuk tabel `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
@@ -448,10 +471,16 @@ ALTER TABLE `periode`
   MODIFY `id_periode` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
+-- AUTO_INCREMENT untuk tabel `tb_pangkat`
+--
+ALTER TABLE `tb_pangkat`
+  MODIFY `id_pangkat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `tb_pengajuan`
 --
 ALTER TABLE `tb_pengajuan`
-  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_pengajuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_pengguna`

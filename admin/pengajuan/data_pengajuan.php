@@ -18,12 +18,12 @@
                         <i class="fas fa-print"></i> Laporan
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" target="_blank" href="./report/cetak-pengajuan.php">Semua</a></li>
-                        <li><a class="dropdown-item" target="_blank"
+                        <li><a class="dropdown-item" target="_blank" href="./report/cetak-pengajuan.php">Cetak</a></li>
+                        <!-- <li><a class="dropdown-item" target="_blank"
                                 href="./report/cetak-pengajuan.php?st=ttp">Tetap</a>
                         </li>
                         <li><a class="dropdown-item" target="_blank"
-                                href="./report/cetak-pengajuan.php?st=hnr">Honorer</a></li>
+                                href="./report/cetak-pengajuan.php?st=hnr">Honorer</a></li> -->
                     </ul>
                 </div>
                 <div class="dropdown ml-1">

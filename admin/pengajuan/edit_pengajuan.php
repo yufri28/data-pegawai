@@ -11,6 +11,9 @@ if (isset($_GET['kode'])) {
 $get_data_periode = "SELECT * FROM periode";
 $data_periode = mysqli_query($koneksi, $get_data_periode);
 
+$get_data_pangkat = "SELECT * FROM tb_pangkat";
+$data_pangkat = mysqli_query($koneksi, $get_data_pangkat);
+
 $get_data_unit = "SELECT * FROM tb_unit WHERE id_unit != 1";
 $data_unit = mysqli_query($koneksi, $get_data_unit);
 
@@ -47,22 +50,40 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
                     </select>
                 </div>
             </div>
+            <!-- Form Group untuk Select Box -->
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Pangkat yang diajukan <small
                         class="text-danger">*</small></label>
                 <div class="col-sm-5">
-                    <select name="pangkat_diajukan" required id="pangkat_diajukan" class="form-control">
+                    <select name="pangkat_diajukan" required id="pangkat_diajukan" class="form-control"
+                        onchange="checkIfOther(this.value)">
                         <option>- Pilih -</option>
-                        <option <?= "Reguler (Fungsional Umum)" == $data_cek['pangkat_diajukan']?'selected':'';?>>
-                            Reguler
-                            (Fungsional Umum)</option>
-                        <option <?= "Reguler (Fungsional Khusus)" == $data_cek['pangkat_diajukan']?'selected':'';?>>
-                            Reguler
-                            (Fungsional Khusus)</option>
-                        <option <?= "Non-Reguler" == $data_cek['pangkat_diajukan']?'selected':'';?>>Non-Reguler</option>
+                        <?php foreach ($data_pangkat as $key => $pangkat):?>
+                        <option <?=$pangkat['nama_pangkat'] == $data_cek['pangkat_diajukan']?'selected':'';?>
+                            value="<?=$pangkat['nama_pangkat'];?>"><?=$pangkat['nama_pangkat'];?></option>
+                        <?php endforeach;?>
+                        <option value="Lainnya">Lainnya</option>
                     </select>
+                    <!-- Input untuk pangkat lainnya -->
+                    <input type="text" name="pangkat_lainnya" id="pangkat_lainnya" class="form-control"
+                        style="display:none;" placeholder="Masukkan pangkat lainnya">
                 </div>
             </div>
+
+            <!-- Script untuk inisialisasi Select2 dan fungsi-fungsi lainnya -->
+            <script>
+            // Fungsi untuk menampilkan input pangkat lainnya jika opsi "Lainnya" dipilih
+            function checkIfOther(selectedValue) {
+                var pangkatLainnyaInput = document.getElementById('pangkat_lainnya');
+                if (selectedValue === 'Lainnya') {
+                    pangkatLainnyaInput.style.display = 'block';
+                    pangkatLainnyaInput.required = true;
+                } else {
+                    pangkatLainnyaInput.style.display = 'none';
+                    pangkatLainnyaInput.required = false;
+                }
+            }
+            </script>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Pengajuan <small class="text-danger">*</small></label>
                 <div class="col-sm-5">
@@ -131,8 +152,16 @@ if (isset($_POST['Ubah'])) {
             echo "<script>alert('File tidak diunggah.');</script>";
         } else {
             // Hapus file dokumen lama jika ada
-            if (file_exists($target_dir.$dokumen_lama)) {
-                unlink($target_dir.$dokumen_lama);
+            if (file_exists($target_dir . $dokumen_lama)) {
+                unlink($target_dir . $dokumen_lama);
+            }
+
+            // Mengecek apakah file dengan nama yang sama sudah ada
+            $counter = 1;
+            while (file_exists($target_file)) {
+                $nama_file = pathinfo($nama_file, PATHINFO_FILENAME) . "_$counter.$fileType";
+                $target_file = $target_dir . $nama_file;
+                $counter++;
             }
 
             // Pindahkan file baru ke folder berkas
@@ -151,6 +180,7 @@ if (isset($_POST['Ubah'])) {
                 exit(); // Berhenti eksekusi script karena terjadi kesalahan unggah file
             }
         }
+
     } else {
         // Tidak ada file baru diunggah, gunakan dokumen lama
         $sql_ubah = "UPDATE tb_pengajuan SET

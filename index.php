@@ -600,7 +600,11 @@
         $('.select2bs4').select2({
             theme: 'bootstrap4'
         })
-    })
+    });
+    // Fungsi untuk inisialisasi Select2
+    $(document).ready(function() {
+        $('#pangkat_diajukan').select2();
+    });
     </script>
 
 </body>
