@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pensiun';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT * FROM data_pensiun dps JOIN data_pegawai dpg ON dps.id_pegawai=dpg.id_pegawai WHERE id_pensiun='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -24,7 +31,7 @@
                                 <b>Nama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama']; ?>
+                                <?php echo $data_cek['nama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -32,7 +39,7 @@
                                 <b>Tahun Pensiun</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tahun_pensiun']; ?>
+                                <?php echo $data_cek['tahun_pensiun']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -40,16 +47,15 @@
                                 <b>Jabatan Terakhir</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['jabatan_terakhir']; ?>
+                                <?php echo $data_cek['jabatan_terakhir']??'-'; ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">
                     <a href="?page=data-pensiun" class="btn btn-warning">Kembali</a>
-
-                    <a href="./report/cetak-data-pensiun.php?nip=<?php echo $data_cek['nip']; ?>" target=" _blank"
-                        title="Cetak Data Pensiun" class="btn btn-primary">Print</a>
+                    <a href="./report/cetak-data-pensiun.php?kode=<?php echo $data_cek['id_pegawai']; ?>"
+                        target="_blank" title="Cetak Data Pensiun" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>

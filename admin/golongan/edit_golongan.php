@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-golongan';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT * FROM data_golongan WHERE id_golongan='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -35,21 +42,21 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Golongan</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['golongan'];?>" class="form-control" id="golongan"
+                    <input type="text" value="<?= $data_cek['golongan']??'-';?>" class="form-control" id="golongan"
                         name="golongan" placeholder="Golongan" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Mulai Terhitung</label>
                 <div class="col-sm-5">
-                    <input type="date" value="<?=$data_cek['tmt'];?>" class="form-control" id="tmt" name="tmt"
+                    <input type="date" value="<?=$data_cek['tmt']??'-';?>" class="form-control" id="tmt" name="tmt"
                         placeholder="Tanggal Mulai Terhitung" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jumlah Gaji</label>
                 <div class="col-sm-5">
-                    <input type="number" value="<?=$data_cek['jumlah_gaji'];?>" class="form-control" min="1"
+                    <input type="number" value="<?=$data_cek['jumlah_gaji']??'-';?>" class="form-control" min="1"
                         id="jumlah_gaji" name="jumlah_gaji" placeholder="Jumlah Gaji" required>
                 </div>
             </div>

@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-jabatan';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT *, dj.nama AS nama_jabatan FROM data_jabatan dj JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai WHERE id_jabatan='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -24,7 +31,7 @@
                                 <b>Nama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama']; ?>
+                                <?php echo $data_cek['nama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -32,7 +39,7 @@
                                 <b>Nama Jabatan</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama_jabatan']; ?>
+                                <?php echo $data_cek['nama_jabatan']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -40,7 +47,7 @@
                                 <b>Eselon</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['eselon']; ?>
+                                <?php echo $data_cek['eselon']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -48,16 +55,15 @@
                                 <b>Tanggal Mulai Terhitung</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tmt']; ?>
+                                <?php echo $data_cek['tmt']??'-'; ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">
                     <a href="?page=data-jabatan" class="btn btn-warning">Kembali</a>
-
-                    <a href="./report/cetak-data-jabatan.php?nip=<?php echo $data_cek['nip']; ?>" target="_blank"
-                        title="Cetak Data Jabatan" class="btn btn-primary">Print</a>
+                    <a href="./report/cetak-data-jabatan.php?kode=<?php echo $data_cek['id_pegawai']; ?>"
+                        target="_blank" title="Cetak Data Jabatan" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>

@@ -1,5 +1,14 @@
 <?php
 
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pegawai';
+        }
+    })</script>";
+}
+
 $get_data_periode = "SELECT * FROM periode";
 $data_periode = mysqli_query($koneksi, $get_data_periode);
 

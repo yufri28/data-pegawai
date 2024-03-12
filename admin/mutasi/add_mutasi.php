@@ -1,4 +1,12 @@
 <?php
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-mutasi';
+        }
+    })</script>";
+}
 $ses_unit = $_SESSION['ses_unit'];
 if($ses_unit == 1){
 	$get_data_pegawai = "SELECT * FROM data_pegawai";

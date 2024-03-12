@@ -8,6 +8,14 @@ if(isset($_GET['kode'])){
 ?>
 
 <?php
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pensiun';
+        }
+    })</script>";
+}else{
     $sql_hapus = "DELETE FROM data_pensiun WHERE id_pensiun='".$_GET['kode']."'";
     $query_hapus = mysqli_query($koneksi, $sql_hapus);
     if ($query_hapus) {
@@ -21,3 +29,4 @@ if(isset($_GET['kode'])){
         }).then((result) => {if (result.value) {window.location = 'index.php?page=data-pensiun'
         ;}})</script>";
     }
+}

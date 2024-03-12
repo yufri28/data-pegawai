@@ -8,9 +8,12 @@
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                 <a href="?page=add-mutasi" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data</a>
+                <?php endif;?>
                 <?php if (mysqli_num_rows($sql) > 0) : ?>
+                <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                 <div class="dropdown ml-1">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="false">
@@ -25,6 +28,7 @@
                                 href="./report/cetak-data-mutasi.php?st=hnr">Honorer</a></li>
                     </ul>
                 </div>
+                <?php endif;?>
                 <div class="dropdown ml-1">
                     <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="false">
@@ -70,7 +74,9 @@
                         <th style="width: 450px;">Nama</th>
                         <th style="width: 350px;">Tempat Mutasi</th>
                         <th style="width: 330px;">Jenis Mutasi</th>
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <th style="width: 220px;">Aksi</th>
+                        <?php endif;?>
                     </tr>
                 </thead>
                 <tbody>
@@ -137,7 +143,7 @@
                         <td>
                             <?php echo $data['jenis_mutasi']; ?>
                         </td>
-
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <td>
                             <a href="?page=view-mutasi&kode=<?php echo $data['id_mutasi']; ?>" title="Detail"
                                 class="btn btn-info btn-sm">
@@ -153,6 +159,7 @@
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
                         </td>
+                        <?php endif;?>
                     </tr>
 
                     <?php

@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pensiun';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT * FROM data_pensiun WHERE id_pensiun='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -43,7 +50,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jabatan</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?=$data_cek['jabatan_terakhir'];?>" class="form-control"
+                    <input type="text" value="<?=$data_cek['jabatan_terakhir']??'-';?>" class="form-control"
                         id="jabatan_terakhir" name="jabatan_terakhir" placeholder="Jabatan Terakhir" required>
                 </div>
             </div>

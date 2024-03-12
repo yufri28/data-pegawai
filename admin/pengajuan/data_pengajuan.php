@@ -9,6 +9,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                 <a href="?page=add-pengajuan" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data Pengajuan</a>
                 <!-- <a href="./report/cetak-pengajuan.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
@@ -26,6 +27,7 @@
                                 href="./report/cetak-pengajuan.php?st=hnr">Honorer</a></li> -->
                     </ul>
                 </div>
+                <?php endif;?>
                 <div class="dropdown ml-1">
                     <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="false">
@@ -72,7 +74,9 @@
                         <th>Pangkat yang diajukan</th>
                         <th>Tanggal Pengajuan</th>
                         <th>Status</th>
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <th>Aksi</th>
+                        <?php endif;?>
                     </tr>
                 </thead>
                 <tbody>
@@ -159,6 +163,7 @@
                             <span
                                 class="bg<?= $data['status_pengajuan'] == 'tunggu'?'-secondary':($data['status_pengajuan'] == 'terima'?'-success':'-danger');?> p-1 rounded-lg"><?php echo ucwords($data['status_pengajuan']); ?></span>
                         </td>
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <td>
                             <a href="?page=view-pengajuan&kode=<?php echo $data['id_pegawai']; ?>" title="Detail"
                                 class="btn btn-info btn-sm">
@@ -174,6 +179,7 @@
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
                         </td>
+                        <?php endif;?>
                     </tr>
 
                     <?php

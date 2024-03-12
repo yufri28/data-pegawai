@@ -9,6 +9,7 @@
     <div class="card-body">
         <div class="table-responsive">
             <div class="d-flex">
+                <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                 <a href="?page=add-pegawai" class="btn btn-primary">
                     <i class="fa fa-plus"></i> Tambah Data Pegawai</a>
                 <!-- <a href="./report/cetak-pegawai.php" target="_blank" class="btn btn-primary"><i class="fas fa-print"></i> Laporan</a> -->
@@ -25,6 +26,7 @@
                                 href="./report/cetak-pegawai.php?st=hnr">Honorer</a></li>
                     </ul>
                 </div>
+                <?php endif;?>
                 <div class="dropdown ml-1">
                     <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown"
                         aria-expanded="false">
@@ -79,7 +81,9 @@
                         <th>SKPP</th>
                         <th>SKPT</th>
                         <th>Unit</th>
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <th>Aksi</th>
+                        <?php endif;?>
                     </tr>
                 </thead>
                 <tbody>
@@ -124,7 +128,11 @@
                                 );
                         }
                         else {
-                            $sql = $koneksi->query("SELECT * FROM data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode JOIN tb_unit u ON u.id_unit = dp.f_id_unit WHERE dp.f_id_unit='$unit'");
+                            $sql = $koneksi->query(
+                                    "SELECT * FROM data_pegawai dp 
+                                    JOIN periode p ON dp.id_periode=p.id_periode 
+                                    JOIN tb_unit u ON u.id_unit = dp.f_id_unit 
+                                    WHERE dp.f_id_unit='$unit'");
                         }
                     }
                     while ($data = $sql->fetch_assoc()) {
@@ -173,6 +181,7 @@
                         <td>
                             <?php echo $data['nama_unit']; ?>
                         </td>
+                        <?php if($_SESSION['ses_level'] == "Administrator" || $_SESSION['ses_level'] == "Operator"):?>
                         <td>
                             <a href="?page=view-pegawai&kode=<?php echo $data['id_pegawai']; ?>" title="Detail"
                                 class="btn btn-info btn-sm">
@@ -188,6 +197,7 @@
                                 class="btn btn-danger btn-sm">
                                 <i class="fa fa-trash"></i>
                         </td>
+                        <?php endif;?>
                     </tr>
 
                     <?php

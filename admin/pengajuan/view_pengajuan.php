@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=pengajuan';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT *, tp.status AS status_pengajuan, dp.status AS status FROM data_pegawai dp 
                 JOIN periode p ON dp.id_periode=p.id_periode 
@@ -79,7 +86,7 @@ $ses_unit = $_SESSION['ses_unit'];
                                 <b>Tanggal Lahir</b>
                             </td>
                             <td>:
-                                <?php echo date('d F Y', strtotime($data_cek['tanggal_lahir'])) ??'-'; ?>
+                                <?php echo date('d F Y', strtotime($data_cek['tanggal_lahir']??'0000-00-00')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -116,18 +123,18 @@ $ses_unit = $_SESSION['ses_unit'];
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Pertama' : 'SK Pengangkatan CPNS' ??'-'; ?></b>
+                                <b><?= !isset($data_cek['status'])?'-':($data_cek['status'] == 'Honor' ? 'SK Pengangkatan Pertama' : 'SK Pengangkatan CPNS'); ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpp'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpp'])) ??'-'; ?>
+                                <?= !isset($data_cek['status'])?'-':($data_cek['skpp'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpp']))); ?>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Terakhir' : 'SK Pensiun' ??'-'; ?></b>
+                                <b><?= !isset($data_cek['status'])?'-':($data_cek['status'] == 'Honor' ? 'SK Pengangkatan Terakhir' : 'SK Pensiun'); ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpt'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpt'])) ??'-'; ?>
+                                <?=!isset($data_cek['status'])?'-':($data_cek['skpt'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpt']??'0000-00-00'))); ?>
                             </td>
                         </tr>
                         <tr>
@@ -196,7 +203,7 @@ $ses_unit = $_SESSION['ses_unit'];
                             </td>
                             <td>:
                                 <span
-                                    class="bg<?= $data_cek['status_pengajuan'] == 'tunggu'?'-secondary':($data_cek['status_pengajuan'] == 'terima'?'-success':'-danger');?> rounded-lg p-1"><?php echo ucwords($data_cek['status_pengajuan']) ??'-'; ?></span>
+                                    class="bg<?= !isset($data_cek['status_pengajuan'])?'-':($data_cek['status_pengajuan'] == 'tunggu'?'-secondary':($data_cek['status_pengajuan'] == 'terima'?'-success':'-danger'));?> rounded-lg p-1"><?php echo ucwords($data_cek['status_pengajuan']??'-'); ?></span>
                             </td>
                         </tr>
                     </tbody>
@@ -208,11 +215,14 @@ $ses_unit = $_SESSION['ses_unit'];
                             placeholder="Berikan pesan terkait penolakan (Jika ditolak)." name="pesan-ditolak"
                             rows="5"></textarea>
 
-                        <button type="submit" <?= $data_cek['status_pengajuan'] == 'terima'?'disabled':'' ?>
+                        <button type="submit"
+                            <?= !isset($data_cek['status_pengajuan'])?'-':($data_cek['status_pengajuan'] == 'terima'?'disabled':''); ?>
                             name="terima" title="Aksi Terima" class="btn btn-success">
                             <i class="nav-icon fas fa-check"></i> Terima</button>
-                        <button type="submit" <?= $data_cek['status_pengajuan'] == 'tolak'?'disabled':'' ?> name="tolak"
-                            title="Aksi Tolak" class="btn btn-danger"> <i class="nav-icon fas fa-times"></i>
+                        <button type="submit"
+                            <?= !isset($data_cek['status_pengajuan'])?'-':($data_cek['status_pengajuan'] == 'tolak'?'disabled':''); ?>
+                            name="tolak" title="Aksi Tolak" class="btn btn-danger"> <i
+                                class="nav-icon fas fa-times"></i>
                             Tolak</button>
                         <?php endif;?>
                         <a href="?page=pengajuan" class="btn btn-warning">Kembali</a>

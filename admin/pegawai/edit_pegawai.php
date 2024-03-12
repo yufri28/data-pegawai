@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pegawai';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT * FROM data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode WHERE id_pegawai='" . $_GET['kode'] . "'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -26,7 +33,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
                 <div class="col-sm-5">
                     <input type="hidden" value="<?= $data_cek['id_pegawai']; ?>" class="form-control" id="id_pegawai"
                         name="id_pegawai" required>
-                    <input type="text" value="<?= $data_cek['nip']; ?>" class="form-control" id="nip" name="nip"
+                    <input type="text" value="<?= $data_cek['nip']??''; ?>" class="form-control" id="nip" name="nip"
                         placeholder="NIP" required>
                 </div>
             </div>
@@ -34,7 +41,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Nama Pegawai</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['nama']; ?>" class="form-control" id="nama" name="nama"
+                    <input type="text" value="<?= $data_cek['nama']??''; ?>" class="form-control" id="nama" name="nama"
                         placeholder="Nama Pegawai" required>
                 </div>
             </div>
@@ -54,14 +61,14 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tempat Lahir</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['tempat_lahir']; ?>" class="form-control" id="tempat_lahir"
-                        name="tempat_lahir" placeholder="Tempat Lahir" required>
+                    <input type="text" value="<?= $data_cek['tempat_lahir']??''; ?>" class="form-control"
+                        id="tempat_lahir" name="tempat_lahir" placeholder="Tempat Lahir" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Lahir</label>
                 <div class="col-sm-5">
-                    <input type="date" value="<?= $data_cek['tanggal_lahir']; ?>" class="form-control"
+                    <input type="date" value="<?= $data_cek['tanggal_lahir']??''; ?>" class="form-control"
                         id="tanggal_lahir" name="tanggal_lahir" placeholder="Tanggal Lahir" required>
                 </div>
             </div>
@@ -69,7 +76,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Masa Kerja</label>
                 <div class="col-sm-5">
-                    <input type="text" class="form-control" value="<?= $data_cek['masa_kerja']; ?>" id="masa_kerja"
+                    <input type="text" class="form-control" value="<?= $data_cek['masa_kerja']??''; ?>" id="masa_kerja"
                         name="masa_kerja" placeholder="Masa Kerja" required>
                 </div>
             </div>
@@ -102,7 +109,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
                 <label for="alamat" class="col-sm-2 col-form-label">Alamat</label>
                 <div class="col-sm-5">
                     <textarea class="form-control" name="alamat" id="alamat"
-                        rows="3"><?= $data_cek['alamat']; ?></textarea>
+                        rows="3"><?= $data_cek['alamat']??''; ?></textarea>
                 </div>
             </div>
             <div class="form-group row">
@@ -120,7 +127,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">SKPP</label>
                 <div class="col-sm-5">
-                    <input type="date" class="form-control" value="<?= $data_cek['skpp']; ?>" id="skpp" name="skpp"
+                    <input type="date" class="form-control" value="<?= $data_cek['skpp']??''; ?>" id="skpp" name="skpp"
                         required>
                     <small><i>Tanggal SK Pengangkatan Pertama (Honor) atau Tanggal SK Pengangkatan CPNS
                             (PNS)</i></small>
@@ -129,7 +136,7 @@ $data_unit = mysqli_query($koneksi, $get_data_unit);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">SKPT</label>
                 <div class="col-sm-5">
-                    <input type="date" class="form-control" value="<?= $data_cek['skpt']; ?>" id="skpt" name="skpt"
+                    <input type="date" class="form-control" value="<?= $data_cek['skpt']??''; ?>" id="skpt" name="skpt"
                         required>
                     <small><i>Tanggal SK Pengangkatan Terakhir (Honor) atau Tanggal SK Pensiun (PNS)</i></small>
                 </div>

@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-mutasi';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT * FROM data_mutasi dps JOIN data_pegawai dpg ON dps.id_pegawai=dpg.id_pegawai WHERE id_mutasi='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -24,7 +31,7 @@
                                 <b>Nama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama']; ?>
+                                <?php echo $data_cek['nama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -32,7 +39,7 @@
                                 <b>Tempat Mutasi</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tempat_mutasi']; ?>
+                                <?php echo $data_cek['tempat_mutasi']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -40,7 +47,7 @@
                                 <b>Jenis Mutasi</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['jenis_mutasi']; ?>
+                                <?php echo $data_cek['jenis_mutasi']??'-'; ?>
                             </td>
                         </tr>
                     </tbody>
@@ -48,7 +55,7 @@
                 <div class="card-footer">
                     <a href="?page=data-mutasi" class="btn btn-warning">Kembali</a>
 
-                    <a href="./report/cetak-data-mutasi.php?nip=<?php echo $data_cek['nip']; ?>" target="_blank"
+                    <a href="./report/cetak-data-mutasi.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target="_blank"
                         title="Cetak Data Mutasi" class="btn btn-primary">Print</a>
                 </div>
             </div>

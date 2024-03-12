@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pegawai';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT * FROM data_pegawai dp JOIN periode p ON dp.id_periode=p.id_periode JOIN tb_unit u ON u.id_unit=dp.f_id_unit WHERE id_pegawai='" . $_GET['kode'] . "'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -23,7 +30,7 @@ if (isset($_GET['kode'])) {
                                 <b>NIP</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nip']; ?>
+                                <?php echo $data_cek['nip']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -31,7 +38,7 @@ if (isset($_GET['kode'])) {
                                 <b>Nama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama']; ?>
+                                <?php echo $data_cek['nama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +46,7 @@ if (isset($_GET['kode'])) {
                                 <b>Alamat</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['alamat']; ?>
+                                <?php echo $data_cek['alamat']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -47,7 +54,7 @@ if (isset($_GET['kode'])) {
                                 <b>Masa Kerja</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['masa_kerja']; ?>
+                                <?php echo $data_cek['masa_kerja']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -55,7 +62,7 @@ if (isset($_GET['kode'])) {
                                 <b>Tempat Lahir</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tempat_lahir']; ?>
+                                <?php echo $data_cek['tempat_lahir']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -63,7 +70,7 @@ if (isset($_GET['kode'])) {
                                 <b>Tanggal Lahir</b>
                             </td>
                             <td>:
-                                <?php echo date('d F Y', strtotime($data_cek['tanggal_lahir'])); ?>
+                                <?php echo date('d F Y', strtotime($data_cek['tanggal_lahir'] ??'0000-00-00')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -71,7 +78,7 @@ if (isset($_GET['kode'])) {
                                 <b>Jenis Kelamin</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['jk']; ?>
+                                <?php echo $data_cek['jk']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -79,7 +86,7 @@ if (isset($_GET['kode'])) {
                                 <b>Agama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['agama']; ?>
+                                <?php echo $data_cek['agama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -87,7 +94,7 @@ if (isset($_GET['kode'])) {
                                 <b>Status Pegawai</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['status']; ?>
+                                <?php echo $data_cek['status']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -95,23 +102,23 @@ if (isset($_GET['kode'])) {
                                 <b>Periode</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tahun']; ?>
+                                <?php echo $data_cek['tahun']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Pertama' : 'SK Pengangkatan CPNS'; ?></b>
+                                <b><?= !isset($data_cek['skpp']) ? '-' : ($data_cek['status'] == 'Honor' ? 'SK Pengangkatan Pertama' : 'SK Pengangkatan CPNS'); ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpp'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpp'])); ?>
+                                <?= !isset($data_cek['skpp']) ? '-' : date('d F Y', strtotime($data_cek['skpp']??'0000-00-00')); ?>
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 150px">
-                                <b><?= $data_cek['status'] == 'Honor' ? 'SK Pengangkatan Terakhir' : 'SK Pensiun'; ?></b>
+                                <b><?= !isset($data_cek['skpp']) ? '-' : ($data_cek['status'] == 'Honor' ? 'SK Pengangkatan Terakhir' : 'SK Pensiun'); ?></b>
                             </td>
                             <td>:
-                                <?= $data_cek['skpt'] == NULL ? '-' : date('d F Y', strtotime($data_cek['skpt'])); ?>
+                                <?= !isset($data_cek['skpt']) ? '-' : date('d F Y', strtotime($data_cek['skpt']??'0000-00-00')); ?>
                             </td>
                         </tr>
                         <tr>
@@ -119,14 +126,14 @@ if (isset($_GET['kode'])) {
                                 <b>Unit</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama_unit']; ?>
+                                <?php echo $data_cek['nama_unit']??'-'; ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">
                     <a href="?page=data-pegawai" class="btn btn-warning">Kembali</a>
-                    <a href="./report/cetak-pegawai.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target=" _blank"
+                    <a href="./report/cetak-pegawai.php?kode=<?php echo $data_cek['id_pegawai']; ?>" target="_blank"
                         title="Cetak Data Pegawai" class="btn btn-primary">Print</a>
                 </div>
             </div>

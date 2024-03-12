@@ -6,12 +6,12 @@ $st = "";
 $ses_unit = $_SESSION['ses_unit'];
 
 if($ses_unit == 1){
-    if (isset($_GET['nip'])) {
-        $nip = $_GET['nip'];
+    if (isset($_GET['kode'])) {
+        $id_pegawai = $_GET['kode'];
         $sql_tampil = "SELECT *, dj.nama AS nama_jabatan 
                         FROM data_jabatan dj 
                         JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai 
-                        WHERE dpg.nip='$nip'";
+                        WHERE dpg.id_pegawai='$id_pegawai'";
     } else {
         if (isset($_GET["st"])) {
             switch ($_GET['st']) {
@@ -34,13 +34,13 @@ if($ses_unit == 1){
     }
     
 }else{
-    if (isset($_GET['nip'])) {
-        $nip = $_GET['nip'];
+    if (isset($_GET['kode'])) {
+        $id_pegawai = $_GET['kode'];
         $sql_tampil = "SELECT *, dj.nama AS nama_jabatan 
                         FROM data_jabatan dj 
                         JOIN data_pegawai dpg ON dj.id_pegawai=dpg.id_pegawai
                         JOIN tb_unit u ON u.id_unit=dpg.f_id_unit 
-                        WHERE dpg.nip='$nip' AND dpg.f_id_unit='$ses_unit'";
+                        WHERE dpg.id_pegawai='$id_pegawai' AND dpg.f_id_unit='$ses_unit'";
     } else {
         if (isset($_GET["st"])) {
             switch ($_GET['st']) {

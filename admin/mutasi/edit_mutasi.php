@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-mutasi';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT * FROM data_mutasi WHERE id_mutasi='" . $_GET['kode'] . "'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -26,7 +33,8 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
                     <select disabled name="id_pegawai" id="id_pegawai" class="form-control">
                         <option value="">- Pilih -</option>
                         <?php foreach ($data_pegawai as $key => $pegawai) : ?>
-                            <option <?= $pegawai['id_pegawai'] == $data_cek['id_pegawai'] ? 'selected' : ''; ?> value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
+                        <option <?= $pegawai['id_pegawai'] == $data_cek['id_pegawai'] ? 'selected' : ''; ?>
+                            value="<?= $pegawai['id_pegawai']; ?>"><?= $pegawai['nama']; ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -34,7 +42,8 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tempat Mutasi</label>
                 <div class="col-sm-5">
-                    <input required class="form-control" type="text" id="tempat_mutasi" value="<?= $data_cek['tempat_mutasi']; ?>" name="tempat_mutasi">
+                    <input required class="form-control" type="text" id="tempat_mutasi"
+                        value="<?= $data_cek['tempat_mutasi']??'-'; ?>" name="tempat_mutasi">
                 </div>
             </div>
 
@@ -43,8 +52,10 @@ $data_pegawai = mysqli_query($koneksi, $get_data_pegawai);
                 <div class="col-sm-5">
                     <select required id="jenis_mutasi" name="jenis_mutasi" class="form-control">
                         <option value="">- Pilih -</option>
-                        <option <?= $data_cek['jenis_mutasi'] == 'Dinas Lama' ? 'selected' : ''; ?> value="Dinas Lama">Dinas Lama</option>
-                        <option <?= $data_cek['jenis_mutasi'] == 'Dinas Baru' ? 'selected' : ''; ?> value="Dinas Baru">Dinas Baru
+                        <option <?= $data_cek['jenis_mutasi'] == 'Dinas Lama' ? 'selected' : ''; ?> value="Dinas Lama">
+                            Dinas Lama</option>
+                        <option <?= $data_cek['jenis_mutasi'] == 'Dinas Baru' ? 'selected' : ''; ?> value="Dinas Baru">
+                            Dinas Baru
                         </option>
                     </select>
                 </div>

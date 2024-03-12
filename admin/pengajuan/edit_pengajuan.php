@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=pengajuan';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT * FROM data_pegawai dp 
                 JOIN periode p ON dp.id_periode=p.id_periode

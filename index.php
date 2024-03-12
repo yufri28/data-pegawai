@@ -113,7 +113,7 @@
 
                         <!-- Level  -->
                         <?php
-						if ($data_level=="Administrator"){
+						if ($data_level=="Administrator" || $data_level=="Kadis"){
                             $sql = $koneksi->query("SELECT COUNT(*) AS jumlah FROM tb_pengajuan WHERE verifikasi='0'");
                             $pengajuan_baru = mysqli_fetch_assoc($sql);
 						?>
@@ -194,6 +194,7 @@
                                     </li>
                                 </ul>
                         </li>
+                        <?php if($data_level == "Administrator"):?>
                         <li class="nav-header">Setting</li>
                         <li class="nav-item">
                             <a href="?page=data-pengguna"
@@ -222,7 +223,7 @@
                                 </p>
                             </a>
                         </li>
-
+                        <?php endif;?>
                         <?php
           				} elseif($data_level=="Operator"){
           				?>

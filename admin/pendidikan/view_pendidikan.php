@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-pendidikan';
+        }
+    })</script>";
+}
 if (isset($_GET['kode'])) {
     $sql_cek = "SELECT * FROM data_pendidikan dpd JOIN data_pegawai dpg ON dpd.id_pegawai=dpg.id_pegawai WHERE id_pendidikan='" . $_GET['kode'] . "'";
     $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -24,7 +31,7 @@ if (isset($_GET['kode'])) {
                                 <b>Nama</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['nama']; ?>
+                                <?php echo $data_cek['nama']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -32,7 +39,7 @@ if (isset($_GET['kode'])) {
                                 <b>Tahun Lulus</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['tahun_lulus']; ?>
+                                <?php echo $data_cek['tahun_lulus']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -40,7 +47,7 @@ if (isset($_GET['kode'])) {
                                 <b>Jurusan</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['jurusan']; ?>
+                                <?php echo $data_cek['jurusan']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -48,7 +55,7 @@ if (isset($_GET['kode'])) {
                                 <b>Pendidikan Terakhir</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['pendidikan_terakhir']; ?>
+                                <?php echo $data_cek['pendidikan_terakhir']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -56,7 +63,7 @@ if (isset($_GET['kode'])) {
                                 <b>Lembaga Pendidikan</b>
                             </td>
                             <td>:
-                                <?php echo $data_cek['lembaga_pendidikan']; ?>
+                                <?php echo $data_cek['lembaga_pendidikan']??'-'; ?>
                             </td>
                         </tr>
                         <tr>
@@ -64,7 +71,7 @@ if (isset($_GET['kode'])) {
                                 <b>Kursus/Diklat</b>
                             </td>
                             <td>:
-                                <?= $data_cek['kursus_diklat'] != NULL ? $data_cek['kursus_diklat'] : '-'; ?>
+                                <?= !isset($data_cek['kursus_diklat']) ?'-':($data_cek['kursus_diklat'] != NULL ? $data_cek['kursus_diklat'] : '-'); ?>
                             </td>
                         </tr>
                         <tr>
@@ -72,15 +79,15 @@ if (isset($_GET['kode'])) {
                                 <b>Pendidikan Perjenjangan</b>
                             </td>
                             <td>:
-                                <?= $data_cek['pend_perjenjangan'] != NULL ? $data_cek['pend_perjenjangan'] : '-'; ?>
+                                <?= !isset($data_cek['pend_perjenjangan'])?'-':($data_cek['pend_perjenjangan'] != NULL ? $data_cek['pend_perjenjangan'] : '-'); ?>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="card-footer">
                     <a href="?page=data-pendidikan" class="btn btn-warning">Kembali</a>
-
-                    <a href="./report/cetak-data-pendidikan.php?nip=<?php echo $data_cek['nip']; ?>" target="_blank" title="Cetak Data Mutasi" class="btn btn-primary">Print</a>
+                    <a href="./report/cetak-data-pendidikan.php?kode=<?php echo $data_cek['id_pegawai']; ?>"
+                        target="_blank" title="Cetak Data Mutasi" class="btn btn-primary">Print</a>
                 </div>
             </div>
         </div>

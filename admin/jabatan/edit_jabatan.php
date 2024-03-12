@@ -1,5 +1,12 @@
 <?php
-
+if($_SESSION['ses_level'] == "Kadis"){
+    echo "<script>
+    Swal.fire({title: 'Anda tidak punya akses ke menu ini!',text: '',icon: 'error',confirmButtonText: 'OK'
+    }).then((result) => {if (result.value){
+        window.location = 'index.php?page=data-jabatan';
+        }
+    })</script>";
+}
     if(isset($_GET['kode'])){
         $sql_cek = "SELECT * FROM data_jabatan WHERE id_jabatan='".$_GET['kode']."'";
         $query_cek = mysqli_query($koneksi, $sql_cek);
@@ -35,21 +42,21 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Eselon</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?=$data_cek['eselon'];?>" class="form-control" id="eselon" name="eselon"
-                        placeholder="Eselon" required>
+                    <input type="text" value="<?=$data_cek['eselon']??'-';?>" class="form-control" id="eselon"
+                        name="eselon" placeholder="Eselon" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Jabatan</label>
                 <div class="col-sm-5">
-                    <input type="text" value="<?= $data_cek['nama'];?>" class="form-control" id="nama_jabatan"
+                    <input type="text" value="<?= $data_cek['nama']??'-';?>" class="form-control" id="nama_jabatan"
                         name="nama_jabatan" placeholder="Jabatan" required>
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Tanggal Mulai Terhitung</label>
                 <div class="col-sm-5">
-                    <input type="date" value="<?=$data_cek['tmt'];?>" class="form-control" id="tmt" name="tmt"
+                    <input type="date" value="<?=$data_cek['tmt']??'-';?>" class="form-control" id="tmt" name="tmt"
                         placeholder="Tanggal Mulai Terhitung" required>
                 </div>
             </div>
